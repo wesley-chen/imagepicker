@@ -190,18 +190,8 @@ ImagePickerChrome.pickImages = function(tabs, title){
         for (var i = 0; i < documentList.length; i++) {
             // handle current document
             var currentDocument = documentList[i];
-            var currentImageList = new Array();
-            var documentImageList = currentDocument.getElementsByTagName('img');
-            for (var j = 0; j < documentImageList.length; j++) {
-                var image = documentImageList[j];
+            var currentImageList = ImagePickerChrome.collectImagesFromDoc(currentDocument);
 
-                var isEmptyImage = (image.style.width == '0px' && image.style.height == '0px')
-                                        || (image.width == 0 && image.height == 0);
-                if (image.src != null && image.src != "" && !isEmptyImage) {
-                    //alert(image.src + " - " +image.style.width + " - " + image.style.height);
-                    currentImageList.push(image);
-                }
-            }
             ImagePicker.Logger.info("document = " + currentDocument.title + ", images = " + currentImageList.length);
 
             imageInfoList = imageInfoList.concat(ImagePickerChrome.convertAndTidyImage(currentImageList, validTabTitle));
@@ -236,6 +226,44 @@ ImagePickerChrome.getDocumentList = function(frame){
     }
 
     return documentList;
+};
+
+ImagePickerChrome.collectImagesFromDoc = function(document){
+    
+    var HTML_NS = "http://www.w3.org/1999/xhtml";
+    var imageElements = [];
+    
+    // Collect from 'img' tag
+    var imageNodeList = document.getElementsByTagName('img');
+    for (var i = 0; i < imageNodeList.length; i++) {
+        imageElements.push(imageNodeList[i]);
+    }
+    
+    // Collect from 'input' tag
+    var inputNodeList = document.getElementsByTagName('input');
+    for (var i = 0; i < inputNodeList.length; i++) {
+        var inputElement = inputNodeList[i];
+        if(inputElement.type == "image" && inputElement.src){
+            var imgElem = document.createElementNS(HTML_NS, "img");
+            imgElem.src = inputElement.src;
+            imageElements.push(imgElem);
+        }
+    }
+    
+    // Filter empty images
+    var currentImageList = [];
+    for (var j = 0; j < imageElements.length; j++) {
+        var image = imageElements[j];
+
+        var isEmptyImage = (image.style.width == '0px' && image.style.height == '0px')
+                                || (image.width == 0 && image.height == 0);
+        if (image.src != null && image.src != "" && !isEmptyImage) {
+            //alert(image.src + " - " +image.style.width + " - " + image.style.height);
+            currentImageList.push(image);
+        }
+    }
+    
+    return currentImageList;
 };
 
 /**
