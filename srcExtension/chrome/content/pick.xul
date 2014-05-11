@@ -5,7 +5,7 @@
 
 <window id="root-windows" title="&pick_window.title;" xmlns:html="http://www.w3.org/1999/xhtml"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-    persist="width height screenX screenY"
+    persist="width height screenX screenY sizemode"
     onload="ImagePickerChrome.Controller.loadPickWindow();" onunload="ImagePickerChrome.Controller.unloadPickWindow();"
     >
     <script type="application/x-javascript" src="common.js" />
