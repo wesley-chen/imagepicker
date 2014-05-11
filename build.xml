@@ -32,6 +32,8 @@
             </propertyset>
         </echoproperties>
 
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${dist.dir}"/>
         <!-- Clean all folders/files under build directory-->
         <delete includeEmptyDirs="true">
             <fileset dir="${build.dir}" includes="**/*"/>
