@@ -178,43 +178,44 @@ ImagePickerChrome.Controller = {
         var savedSubFolderMenulist = document.getElementById("savedSubFolderMenulist");
         if (!(this.settings.isCreatedFolderByTitle() && this.settings.isShowSubfolderInUI())) {
             savedSubFolderMenulist.hidden = true;
-            return;
         }
 
-        // Create sub-folder
-        var subFolderName = ImagePicker.FileUtils.makeFolderNameByTitle(window.document.title);
-
-        // prepare menu items
-        var folders = [];
-        // locate current directory
-        var destPath = document.getElementById("savedPathMenulist").value;
-        var dest = ImagePicker.FileUtils.toDirectory(destPath);
-        if (dest && dest.isDirectory()) {
-            var dirEntries = dest.directoryEntries;
-            while (dirEntries.hasMoreElements()) {
-                var entry = dirEntries.getNext();
-                entry.QueryInterface(Components.interfaces.nsIFile);
-                if (entry.isDirectory()) {
-                    folders.push(entry);
+        if(this.settings.isCreatedFolderByTitle()){
+            // Create sub-folder
+            var subFolderName = ImagePicker.FileUtils.makeFolderNameByTitle(window.document.title);
+    
+            // prepare menu items
+            var folders = [];
+            // locate current directory
+            var destPath = document.getElementById("savedPathMenulist").value;
+            var dest = ImagePicker.FileUtils.toDirectory(destPath);
+            if (dest && dest.isDirectory()) {
+                var dirEntries = dest.directoryEntries;
+                while (dirEntries.hasMoreElements()) {
+                    var entry = dirEntries.getNext();
+                    entry.QueryInterface(Components.interfaces.nsIFile);
+                    if (entry.isDirectory()) {
+                        folders.push(entry);
+                    }
                 }
             }
+    
+            // sort by last modified time DESC
+            folders.sort(function(folder1, folder2) {
+                return -(folder1.lastModifiedTime - folder2.lastModifiedTime);
+            });
+    
+            var folderNames = [ subFolderName ];
+            folders.forEach(function(folder) {
+                folderNames.push(folder.leafName);
+            });
+    
+            for (var i = 0; i < folderNames.length; i++) {
+                savedSubFolderMenulist.insertItemAt(i, folderNames[i]);
+            }
+    
+            savedSubFolderMenulist.selectedIndex = 0;
         }
-
-        // sort by last modified time DESC
-        folders.sort(function(folder1, folder2) {
-            return -(folder1.lastModifiedTime - folder2.lastModifiedTime);
-        });
-
-        var folderNames = [ subFolderName ];
-        folders.forEach(function(folder) {
-            folderNames.push(folder.leafName);
-        });
-
-        for (var i = 0; i < folderNames.length; i++) {
-            savedSubFolderMenulist.insertItemAt(i, folderNames[i]);
-        }
-
-        savedSubFolderMenulist.selectedIndex = 0;
 
     },
 
