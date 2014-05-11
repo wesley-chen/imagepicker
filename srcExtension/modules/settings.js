@@ -146,6 +146,10 @@ ImagePicker.Settings =  {
     getRenamingMask: function(){
         return this._prefs.getCharPref("renamingMask");
     },
+    
+    getRenamingStartNum: function(){
+        return this._prefs.getIntPref("renamingStartNum");
+    },
 
     isOpenExplorerAfterSaved: function(){
         return this._prefs.getBoolPref("openExplorerAfterSaved");

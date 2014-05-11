@@ -43,6 +43,7 @@ pref('extensions.imagepicker.removeTextFromTitle', "- Mozilla Firefox\n- Powered
 
 pref('extensions.imagepicker.renamingEnable', false);
 pref('extensions.imagepicker.renamingMask', "<seq_num>");
+pref('extensions.imagepicker.renamingStartNum', 1);
 
 pref('extensions.imagepicker.openExplorerAfterSaved', true);
 pref('extensions.imagepicker.openDownloadManagerAfterSaved', false);

@@ -26,6 +26,7 @@
         <preference id="pref-removeTextFromTitle" name="extensions.imagepicker.removeTextFromTitle" type="unichar"/>
         <preference id="pref-renamingEnable" name="extensions.imagepicker.renamingEnable" type="bool" />
         <preference id="pref-renamingMask" name="extensions.imagepicker.renamingMask" type="string" />
+        <preference id="pref-renamingStartNum" name="extensions.imagepicker.renamingStartNum" type="int" />
         <preference id="pref-openExplorerAfterSaved" name="extensions.imagepicker.openExplorerAfterSaved" type="bool" />
         <preference id="pref-closeImagePickerAfterSaved" name="extensions.imagepicker.closeImagePickerAfterSaved" type="bool" />
         <preference id="pref-closeBrowserTabAfterSaved" name="extensions.imagepicker.closeBrowserTabAfterSaved" type="bool" />
@@ -49,10 +50,23 @@
             </groupbox>
             <groupbox>
                  <caption label="&pref_file_creation.label;" />
-                 <hbox>
-                     <checkbox label="&pref_rename_image_enable;" preference="pref-renamingEnable" oncommand="ImagePickerChrome.Options.enableOrDisableRenamingElements(this.checked);"/>
-                     <textbox id="renamingMaskTextbox" preference="pref-renamingMask" style="width: 300px;"/>
-                 </hbox>
+                 <grid pack="center" >
+                        <columns>
+                            <column />
+                            <column />
+                        </columns>
+                        <rows>
+                            <row>
+                                 <checkbox label="&pref_rename_image_enable;" preference="pref-renamingEnable" oncommand="ImagePickerChrome.Options.enableOrDisableRenamingElements(this.checked);"/>
+                                 <textbox id="renamingMaskTextbox" preference="pref-renamingMask" style="width: 300px;"/>
+                            </row>
+                            <row>
+                                 <label value="&pref_rename_start_num;" style="margin-left: 60px;"/>
+                                 <textbox id="renamingStartNumTextbox" preference="pref-renamingStartNum" type="number" style="width: 50px; margin-Right: 200px;"/>
+                                 <space flex="1" />
+                            </row>
+                        </rows>
+                 </grid>
                  <label value="&pref_rename_tags_desc;" style="font-weight:bold; margin-left: 26px;"/>
                  <grid pack="center" style="margin-left: 26px;">
                         <columns>
@@ -85,7 +99,7 @@
               </groupbox>
       </vbox>
     </prefpane>
-        <prefpane id="paneSingleDownload" label="&pref_paneSingleDownload.label;" image="chrome://imagepicker/skin/option-mouse32.png">
+    <prefpane id="paneSingleDownload" label="&pref_paneSingleDownload.label;" image="chrome://imagepicker/skin/option-mouse32.png">
           <preferences>
             <preference id="pref-collectorDoubleclickImageToSaveEnable" name="extensions.imagepicker.collector.doubleclickImageToSave.enable" type="bool" />
             <preference id="pref-collectorDragImageToSaveEnable" name="extensions.imagepicker.collector.dragImageToSave.enable" type="bool" />

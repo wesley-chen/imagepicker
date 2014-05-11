@@ -13,7 +13,7 @@ Cu.import("resource://imagepicker/common.js");
  * @param {Number} digits digits Number of digits the results must contain at least
  */
 ImagePicker.Sequence = function(start, digits) {
-    this.nextNum = start;
+    this.nextNum = start-1;
     this.digits = digits;
 };
 

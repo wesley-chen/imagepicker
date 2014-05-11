@@ -52,11 +52,15 @@ ImagePickerChrome.Options = {
 
         var renamingMaskTextbox = document
                 .getElementById("renamingMaskTextbox");
+        var renamingStartNumTextbox = document
+        .getElementById("renamingStartNumTextbox");
 
         if (enable) {
             renamingMaskTextbox.disabled = false;
+            renamingStartNumTextbox.disabled = false;
         } else {
             renamingMaskTextbox.disabled = true;
+            renamingStartNumTextbox.disabled = true;
         }
     },
 

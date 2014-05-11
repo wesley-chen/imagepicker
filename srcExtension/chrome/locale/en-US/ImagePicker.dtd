@@ -25,6 +25,7 @@
 
 <!ENTITY pref_file_creation.label "File Creation">
 <!ENTITY pref_rename_image_enable "Rename image by masks">
+<!ENTITY pref_rename_start_num "Start Number">
 <!ENTITY pref_rename_tags_desc "Renaming Tags">
 <!ENTITY pref_rename_tag_seq_num "&lt;seq_num&gt;">
 <!ENTITY pref_rename_tag_seq_num_desc "Sequence number, e.g. 001, 002, 003 ...">

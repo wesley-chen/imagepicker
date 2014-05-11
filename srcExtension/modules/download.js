@@ -100,6 +100,7 @@ ImagePicker.DownloadSession.prototype = {
 
     _renameByMasks : function(images) {
         var masks = ImagePicker.Settings.getRenamingMask();
+        var startNum = ImagePicker.Settings.getRenamingStartNum();
         ImagePicker.Logger.debug("Renaming masks: " + masks + ", images.length = " + images.length);
         if(masks == null || masks == ""){
             return;
@@ -112,7 +113,7 @@ ImagePicker.DownloadSession.prototype = {
         var needRenameByOriginalName = /<name>/.test(masks);
 
         var maxDigits = images.length.toString().length;
-        var seq = new ImagePicker.Sequence(0, maxDigits);
+        var seq = new ImagePicker.Sequence(startNum, maxDigits);
 
         var date = new Date();
         var dateStr = date.getFullYear() + "-" + (date.getMonth() +1) + "-" + date.getDate();

@@ -26,6 +26,7 @@
 
 <!ENTITY pref_file_creation.label "创建文件">
 <!ENTITY pref_rename_image_enable "按指定的标记重命名图片">
+<!ENTITY pref_rename_start_num "重命名的开始数字">
 <!ENTITY pref_rename_tags_desc "重命名标记">
 <!ENTITY pref_rename_tag_seq_num "&lt;seq_num&gt;">
 <!ENTITY pref_rename_tag_seq_num_desc "按图片的出现顺序，自动重命名图片, 例如： 001, 002, 003 ...">
