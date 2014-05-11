@@ -162,6 +162,7 @@ ImagePicker.FileUtils = {
 
         // create new folder with window title
         try {
+            subFolderName = this.toValidName(subFolderName);
             subFolder.append(subFolderName);
             if (!subFolder.exists() || !subFolder.isDirectory()) {
                 // if it doesn't exist, create
@@ -181,12 +182,13 @@ ImagePicker.FileUtils = {
         // remove unnecessary text
         var textLines = ImagePicker.Settings.getRemoveTextFromTitle();
         for ( var i = 0; i < textLines.length; i++) {
-            var reg = new RegExp(textLines[i], "gi");
+            var excapedReqExp = textLines[i].replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&");
+            var reg = new RegExp(excapedReqExp, "gi");
             subFolderName = subFolderName.replace(reg, '');
         }
 
         subFolderName = subFolderName.replace(/\./g, '');
 
-        return this.toValidName(subFolderName);
+        return subFolderName;
     }
 };

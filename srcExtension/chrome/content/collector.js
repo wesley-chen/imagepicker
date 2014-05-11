@@ -149,7 +149,8 @@ ImagePickerChrome.Collector = {
                 return file;
             } else {
                 if(ImagePicker.Settings.isCreatedFolderByTitleForSingle()){
-                    var subFolderName = ImagePicker.FileUtils.makeFolderNameByTitle(window.document.title);
+                    var currentTabTitle = ImagePickerChrome.getCurrentBrowser().contentDocument.title;
+                    var subFolderName = ImagePicker.FileUtils.makeFolderNameByTitle(currentTabTitle);
                     var subFolder = ImagePicker.FileUtils.createFolder(destPath, subFolderName);
                     if(subFolder != null){
                         destDir = subFolder;

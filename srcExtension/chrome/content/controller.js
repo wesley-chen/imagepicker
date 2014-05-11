@@ -415,7 +415,7 @@ ImagePickerChrome.Controller = {
                 dest = subFolder;
 
                 // Saved removed texts automatically
-                var originalSubFolderName = ImagePicker.FileUtils.makeFolderNameByTitle(window.document.title);
+                var originalSubFolderName = window.document.title;
                 var startPos = originalSubFolderName.indexOf(subFolderName);
 
                 ImagePicker.Logger.debug("originalSubFolderName=" + originalSubFolderName + ", subFolderName=" + subFolderName + "startPos=" + startPos);
