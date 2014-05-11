@@ -1,6 +1,8 @@
 /** **************** Controller Class ******************** */
-const Cc = Components.classes;
-const Ci = Components.interfaces;
+const
+Cc = Components.classes;
+const
+Ci = Components.interfaces;
 Components.utils.import("resource://imagepicker/common.js");
 Components.utils.import("resource://imagepicker/hashMap.js");
 Components.utils.import("resource://imagepicker/fileUtils.js");
@@ -12,7 +14,7 @@ Components.utils.import("resource://imagepicker/download.js");
 
 /**
  * Provides the controller
- *
+ * 
  * @namespace ImagePickerChrome
  * @class ImagePickerChrome.Controller
  * @constructor
@@ -21,7 +23,7 @@ ImagePickerChrome.Controller = {
 
     /**
      * callback function for loading pick window
-     *
+     * 
      * @method init
      */
     init : function() {
@@ -35,25 +37,25 @@ ImagePickerChrome.Controller = {
         var postSavedListenersFromArgument = window.arguments[0].listeners;
 
         /**
-         * Register the given listener to extend the after image saving behavior
-         * The given listener must have a afterSavedImages() method.
+         * Register the given listener to extend the after image saving behavior The given listener must have a
+         * afterSavedImages() method.
          */
         var postSavedListener = {
-            afterSavedImages: function(savedFolder, images){
-                //open Explorer after saved if need
+            afterSavedImages : function(savedFolder, images) {
+                // open Explorer after saved if need
                 if (ImagePicker.Settings.isOpenExplorerAfterSaved()) {
                     ImagePicker.FileUtils.revealDirectory(savedFolder);
                 }
 
-                //close ImagePicker dialog after saved if need
+                // close ImagePicker dialog after saved if need
                 if (ImagePicker.Settings.isCloseImagePickerAfterSaved()) {
                     self.close();
                 }
             }
         };
 
-        this.postSavedListeners = [postSavedListener];
-        this.postSavedListeners =  this.postSavedListeners.concat(postSavedListenersFromArgument);
+        this.postSavedListeners = [ postSavedListener ];
+        this.postSavedListeners = this.postSavedListeners.concat(postSavedListenersFromArgument);
         ImagePicker.Logger.debug("Argument listeners: " + postSavedListenersFromArgument.length);
         ImagePicker.Logger.debug("PostSavedListeners: " + this.postSavedListeners.length);
 
@@ -77,7 +79,7 @@ ImagePickerChrome.Controller = {
 
     /**
      * callback function for loading pick window
-     *
+     * 
      * @method loadPickWindow
      */
     loadPickWindow : function() {
@@ -132,25 +134,25 @@ ImagePickerChrome.Controller = {
 
         // Remove all menu items except menu separator and "Clear all" menu items
         var endIndex = savedPathMenulist.itemCount - 3;
-        for (var i = endIndex; i >=0; i--) {
+        for (var i = endIndex; i >= 0; i--) {
             savedPathMenulist.removeItemAt(i);
         }
         savedPathMenulist.selectedIndex = -1;
 
         // Add menu items from settings
         var paths = this.settings.getSavedFolderPaths();
-        for(var i=0; i< paths.length; i++){
-           var item = savedPathMenulist.insertItemAt(i,paths[i]);
+        for (var i = 0; i < paths.length; i++) {
+            var item = savedPathMenulist.insertItemAt(i, paths[i]);
         }
 
         // select one
-        if(paths.length > 0){
+        if (paths.length > 0) {
             savedPathMenulist.selectedIndex = 0;
-        }else{
+        } else {
             savedPathMenulist.selectedIndex = -1;
         }
 
-        //enable "Clear All" menu item only if have path
+        // enable "Clear All" menu item only if have path
         var clearAllSavedPathsMenuItem = document.getElementById("clearAllSavedPathsMenuItem");
         clearAllSavedPathsMenuItem.disabled = (paths.length == 0);
     },
@@ -159,7 +161,7 @@ ImagePickerChrome.Controller = {
 
         this.settings.addSavedFolderPath(path);
 
-        //update UI
+        // update UI
         this._renderSavedFolderPathMenuList();
     },
 
@@ -167,59 +169,58 @@ ImagePickerChrome.Controller = {
 
         this.settings.clearSavedFolderPaths(path);
 
-        //update UI
+        // update UI
         this._renderSavedFolderPathMenuList();
     },
 
     _renderSavedSubFolder : function() {
 
         var savedSubFolderMenulist = document.getElementById("savedSubFolderMenulist");
-        if(!this.settings.isShowSubfolderInUI()){
+        if (!(this.settings.isCreatedFolderByTitle() && this.settings.isShowSubfolderInUI())) {
             savedSubFolderMenulist.hidden = true;
+            return;
         }
 
-        //Create sub-folder if need
-        if(this.settings.isCreatedFolderByTitle()){
+        // Create sub-folder
+        var subFolderName = ImagePicker.FileUtils.makeFolderNameByTitle(window.document.title);
 
-            var subFolderName = ImagePicker.FileUtils.makeFolderNameByTitle(window.document.title);
-
-            //prepare menu items
-            var folders = [];
-            // locate current directory
-            var destPath = document.getElementById("savedPathMenulist").value;
-            var dest = ImagePicker.FileUtils.toDirectory(destPath);
-            if (dest && dest.isDirectory()) {
-                var dirEntries = dest.directoryEntries;
-                while (dirEntries.hasMoreElements()) {
-                    var entry = dirEntries.getNext();
-                    entry.QueryInterface(Components.interfaces.nsIFile);
-                    if(entry.isDirectory()){
-                        folders.push(entry);
-                    }
+        // prepare menu items
+        var folders = [];
+        // locate current directory
+        var destPath = document.getElementById("savedPathMenulist").value;
+        var dest = ImagePicker.FileUtils.toDirectory(destPath);
+        if (dest && dest.isDirectory()) {
+            var dirEntries = dest.directoryEntries;
+            while (dirEntries.hasMoreElements()) {
+                var entry = dirEntries.getNext();
+                entry.QueryInterface(Components.interfaces.nsIFile);
+                if (entry.isDirectory()) {
+                    folders.push(entry);
                 }
             }
-
-            // sort by last modified time DESC
-            folders.sort(function(folder1, folder2){
-                return -(folder1.lastModifiedTime - folder2.lastModifiedTime);
-            });
-
-            var folderNames = [subFolderName];
-            folders.forEach(function(folder){
-                folderNames.push(folder.leafName);
-            });
-
-            for (var i = 0; i < folderNames.length; i++) {
-                savedSubFolderMenulist.insertItemAt(i, folderNames[i]);
-            }
-
-            savedSubFolderMenulist.selectedIndex = 0;
         }
+
+        // sort by last modified time DESC
+        folders.sort(function(folder1, folder2) {
+            return -(folder1.lastModifiedTime - folder2.lastModifiedTime);
+        });
+
+        var folderNames = [ subFolderName ];
+        folders.forEach(function(folder) {
+            folderNames.push(folder.leafName);
+        });
+
+        for (var i = 0; i < folderNames.length; i++) {
+            savedSubFolderMenulist.insertItemAt(i, folderNames[i]);
+        }
+
+        savedSubFolderMenulist.selectedIndex = 0;
+
     },
 
     /**
      * callback function for unloading pick window
-     *
+     * 
      * @method unloadPickWindow
      */
     unloadPickWindow : function() {
@@ -244,24 +245,24 @@ ImagePickerChrome.Controller = {
         this._addSavedFolderPath(document.getElementById("savedPathMenulist").value);
     },
 
-     onResize : function() {
+    onResize : function() {
 
-        if(!this.isResizeToMinWidth){
+        if (!this.isResizeToMinWidth) {
             this.isResizeToMinWidth = true;
             var windowWidth = window.outerWidth;
             if (windowWidth < this.MIN_WINDOW_WIDTH) {
                 window.sizeToContent();
-                //window.resizeTo(this.MIN_WINDOW_WIDTH, window.outerHeight);
+                // window.resizeTo(this.MIN_WINDOW_WIDTH, window.outerHeight);
                 ImagePicker.Logger.debug("ResizeToMinWidth: from " + windowWidth + " to " + window.outerWidth);
             }
         }
 
         this.refreshImageContainer();
-     },
+    },
 
     /**
      * refresh image container
-     *
+     * 
      * @method refreshImageContainer
      */
     refreshImageContainer : function() {
@@ -280,9 +281,9 @@ ImagePickerChrome.Controller = {
 
         // display select status
         var imageIds = this.selectedMap.keys();
-        for(var i=0; i< imageIds.length; i++){
+        for (var i = 0; i < imageIds.length; i++) {
             var imageId = imageIds[i];
-            if(this.selectedMap.get(imageId) == true){
+            if (this.selectedMap.get(imageId) == true) {
                 this._selectImage(imageId);
             }
         }
@@ -290,7 +291,7 @@ ImagePickerChrome.Controller = {
 
     /**
      * filter images
-     *
+     * 
      * @method doFilter
      */
     doFilter : function() {
@@ -334,11 +335,11 @@ ImagePickerChrome.Controller = {
 
     /**
      * Show all images
-     *
+     * 
      * @method doShowAll
      */
     doShowAll : function() {
-            // do filter
+        // do filter
         this.imageList = this.rawImageList;
 
         this.unselectAllImages();
@@ -351,7 +352,7 @@ ImagePickerChrome.Controller = {
 
     /**
      * view image for thumbnail type
-     *
+     * 
      * @method doViewAS
      */
     doViewAS : function() {
@@ -374,7 +375,7 @@ ImagePickerChrome.Controller = {
 
     /**
      * browse directory
-     *
+     * 
      * @method browseDir
      */
     browseDir : function() {
@@ -403,34 +404,37 @@ ImagePickerChrome.Controller = {
 
         if (!dest) {
             alert(this.getI18NString('invalidSaveFolder'));
-            return null;;
+            return null;
+            ;
         }
 
-        //Create sub-folder if need
-        if(this.settings.isCreatedFolderByTitle()){
+        // Create sub-folder if need
+        if (this.settings.isCreatedFolderByTitle()) {
 
             var subFolderName = document.getElementById("savedSubFolderMenulist").value;
             var subFolder = ImagePicker.FileUtils.createFolder(destPath, subFolderName);
-            if(subFolder != null){
+            if (subFolder != null) {
                 dest = subFolder;
 
                 // Saved removed texts automatically
                 var originalSubFolderName = window.document.title;
                 var startPos = originalSubFolderName.indexOf(subFolderName);
 
-                ImagePicker.Logger.debug("originalSubFolderName=" + originalSubFolderName + ", subFolderName=" + subFolderName + "startPos=" + startPos);
+                ImagePicker.Logger.debug("originalSubFolderName=" + originalSubFolderName + ", subFolderName="
+                        + subFolderName + "startPos=" + startPos);
 
-                if(startPos > -1){
+                if (startPos > -1) {
                     var removedHeaderText = originalSubFolderName.substring(0, startPos);
                     var removedTailText = originalSubFolderName.substring(startPos + subFolderName.length);
-                    ImagePicker.Logger.debug("removedHeaderText=" + removedHeaderText + ", removedTailText=" + removedTailText);
+                    ImagePicker.Logger.debug("removedHeaderText=" + removedHeaderText + ", removedTailText="
+                            + removedTailText);
 
                     var separatorRE = /\W|\s/g;
-                    if(separatorRE.test(removedHeaderText)){
+                    if (separatorRE.test(removedHeaderText)) {
                         ImagePicker.Logger.debug("add head text to be removed");
                         this.settings.addTextToBeRemoveFromTitle(removedHeaderText);
                     }
-                    if(separatorRE.test(removedTailText)){
+                    if (separatorRE.test(removedTailText)) {
                         ImagePicker.Logger.debug("add tail text to be removed");
                         this.settings.addTextToBeRemoveFromTitle(removedTailText);
                     }
@@ -441,11 +445,10 @@ ImagePickerChrome.Controller = {
         return dest;
     },
 
-
-    selectAllImages: function(){
+    selectAllImages : function() {
 
         this.selectedMap = new ImagePicker.HashMap();
-        for ( var i = 0; i < this.imageList.length; i++) {
+        for (var i = 0; i < this.imageList.length; i++) {
             var img = this.imageList[i];
             this._selectImage(img.id);
         }
@@ -453,10 +456,10 @@ ImagePickerChrome.Controller = {
         ImagePicker.Logger.debug("select all images ");
     },
 
-    unselectAllImages: function(){
+    unselectAllImages : function() {
 
         this.selectedMap = new ImagePicker.HashMap();
-        for ( var i = 0; i < this.imageList.length; i++) {
+        for (var i = 0; i < this.imageList.length; i++) {
             var img = this.imageList[i];
             this._unselectImage(img.id);
         }
@@ -464,49 +467,50 @@ ImagePickerChrome.Controller = {
         ImagePicker.Logger.debug("Unselect all images ");
     },
 
-    _selectImage: function(imageId){
+    _selectImage : function(imageId) {
         this.selectedMap.put(imageId, true);
         var checkbox = document.getElementById(imageId + "-CheckBox");
         if (checkbox) {
             checkbox.setAttribute("checked", true);
         }
         var imageCell = document.getElementById(imageId + "-CellBox");
-        if(imageCell){
-            ImagePicker.XulUtils.addClass(imageCell,"image-cell-selected");
+        if (imageCell) {
+            ImagePicker.XulUtils.addClass(imageCell, "image-cell-selected");
         }
     },
 
-    _unselectImage: function(imageId){
+    _unselectImage : function(imageId) {
         this.selectedMap.put(imageId, false);
         var checkbox = document.getElementById(imageId + "-CheckBox");
         if (checkbox) {
             checkbox.setAttribute("checked", false);
         }
         var imageCell = document.getElementById(imageId + "-CellBox");
-        if(imageCell){
-            ImagePicker.XulUtils.removeClass(imageCell,"image-cell-selected");
+        if (imageCell) {
+            ImagePicker.XulUtils.removeClass(imageCell, "image-cell-selected");
         }
     },
 
-    selectSimilarImages: function(element){
+    selectSimilarImages : function(element) {
 
-        //Find match URL
+        // Find match URL
         var imageInfo = this.getImageFromPopupNode(element);
-        if(!imageInfo){
+        if (!imageInfo) {
             return;
         }
 
         var imageURLDomain = imageInfo.url.substring(0, imageInfo.url.lastIndexOf('/'));
-        ImagePicker.Logger.debug("Popup node: " + element.nodeName + ", ImageInfo = " + imageInfo + ", ImageURLDomain = " + imageURLDomain);
+        ImagePicker.Logger.debug("Popup node: " + element.nodeName + ", ImageInfo = " + imageInfo
+                + ", ImageURLDomain = " + imageURLDomain);
 
-        //Select similar images
+        // Select similar images
         var re = new RegExp(imageURLDomain);
         this.selectedMap = new ImagePicker.HashMap();
-        for ( var i = 0; i < this.imageList.length; i++) {
+        for (var i = 0; i < this.imageList.length; i++) {
             var img = this.imageList[i];
-            if(re.test(img.url)){
+            if (re.test(img.url)) {
                 this._selectImage(img.id);
-            }else{
+            } else {
                 this._unselectImage(img.id);
             }
         }
@@ -515,22 +519,22 @@ ImagePickerChrome.Controller = {
         ImagePicker.Logger.debug("select similar images ");
     },
 
-    handleOpenContextMenu: function(){
+    handleOpenContextMenu : function() {
         var element = document.popupNode;
         var isImageCell = (this.getImageFromPopupNode(element) != null);
         document.getElementById("selectSimilarMenuItem").hidden = !isImageCell;
     },
 
-    getImageFromPopupNode: function(popupNode){
+    getImageFromPopupNode : function(popupNode) {
 
         var imageId = null;
         if (popupNode.nodeName == 'image') {
             imageId = popupNode.getAttribute("id");
         } else {
             var node = popupNode;
-            while(node != null && node.nodeName != 'row'){
+            while (node != null && node.nodeName != 'row') {
                 var nodeId = node.getAttribute("id");
-                if(nodeId){
+                if (nodeId) {
                     imageId = /\d+/.exec(nodeId)
                     break;
                 }
@@ -538,11 +542,11 @@ ImagePickerChrome.Controller = {
             }
         }
 
-        //Find match ImageInfo
+        // Find match ImageInfo
         var imageInfo = null;
-         for ( var i = 0; i < this.imageList.length; i++) {
+        for (var i = 0; i < this.imageList.length; i++) {
             var img = this.imageList[i];
-            if(img.id == imageId){
+            if (img.id == imageId) {
                 imageInfo = img;
                 break;
             }
@@ -551,34 +555,35 @@ ImagePickerChrome.Controller = {
         return imageInfo;
     },
 
-    handleClickOnImage: function(imageId){
-      ImagePicker.Logger.debug("select image: " + imageId);
-      var isSelected = this.selectedMap.get(imageId);
-      if(isSelected){//switch status
-          this._unselectImage(imageId);
-      }else{
-          this._selectImage(imageId);
-      }
-      this.updateStatuBar();
+    handleClickOnImage : function(imageId) {
+        ImagePicker.Logger.debug("select image: " + imageId);
+        var isSelected = this.selectedMap.get(imageId);
+        if (isSelected) {// switch status
+            this._unselectImage(imageId);
+        } else {
+            this._selectImage(imageId);
+        }
+        this.updateStatuBar();
     },
 
-    updateStatuBar: function(){
+    updateStatuBar : function() {
         // update status bar
         var oldImageConut = this.rawImageList.length;
         var newImageConut = this.imageList.length;
         var selectedImageConut = 0;
         var values = this.selectedMap.values();
         for (var i = 0; i < values.length; i++) {
-            if(values[i] == true){
+            if (values[i] == true) {
                 selectedImageConut++;
             }
         }
-        document.getElementById("filterStat").label = this.getFormattedString("statusBarText",[newImageConut, selectedImageConut, oldImageConut]);
+        document.getElementById("filterStat").label = this.getFormattedString("statusBarText", [ newImageConut,
+                selectedImageConut, oldImageConut ]);
     },
 
     /**
      * save image to local
-     *
+     * 
      * @method doSaveImages
      */
     doSaveImages : function(images) {
@@ -591,44 +596,47 @@ ImagePickerChrome.Controller = {
 
         // Collect saved files
         var savedImages = new Array();
-        for ( var i = 0; i < this.imageList.length; i++) {
+        for (var i = 0; i < this.imageList.length; i++) {
             var img = this.imageList[i];
             if (this.selectedMap.get(img.id) == true) { // saved selected image only
                 savedImages.push(img);
             }
         }
 
-        if(savedImages.length == 0){
-           return;
+        if (savedImages.length == 0) {
+            return;
         }
 
         var newDownloadProgressListener = new ImagePickerChrome.DownloadProgressListener(savedImages.length);
         var stringsBundle = this.getStringsBundle();
 
-         var notificationTitle = stringsBundle.getFormattedString("saveNotificationTitleMultiple", [ savedImages.length ]);
-         var notification = new ImagePickerChrome.Notification(notificationTitle, dest.path, this.browser, this.popupNotifications);
-         notification.show();
+        var notificationTitle = stringsBundle.getFormattedString("saveNotificationTitleMultiple",
+                [ savedImages.length ]);
+        var notification = new ImagePickerChrome.Notification(notificationTitle, dest.path, this.browser,
+                this.popupNotifications);
+        notification.show();
 
         var privacyInfo = ImagePickerChrome.getPrivacyInfo();
-        var downloadSession = new ImagePicker.DownloadSession(savedImages, dest, null, privacyInfo, newDownloadProgressListener, this.postSavedListeners, stringsBundle, true);
+        var downloadSession = new ImagePicker.DownloadSession(savedImages, dest, null, privacyInfo,
+                newDownloadProgressListener, this.postSavedListeners, stringsBundle, true);
         downloadSession.saveImages();
     },
 
-    getStringsBundle: function(){
+    getStringsBundle : function() {
         // Get a reference to the strings bundle
-        if(this.stringsBundle == null){
+        if (this.stringsBundle == null) {
             this.stringsBundle = document.getElementById("ip-string-bundle");
         }
         return this.stringsBundle;
     },
 
-    getI18NString: function(key){
+    getI18NString : function(key) {
         // Get a reference to the strings bundle
         var stringsBundle = this.getStringsBundle();
         return stringsBundle.getString(key);
     },
 
-    getFormattedString : function(key, parameters){
+    getFormattedString : function(key, parameters) {
         // Get a reference to the strings bundle
         var stringsBundle = this.getStringsBundle();
         return stringsBundle.getFormattedString(key, parameters);
@@ -638,7 +646,7 @@ ImagePickerChrome.Controller = {
 /** **************** DownloadProgressListener Object Class ******************** */
 /**
  * Provides the DownloadProgressListener class
- *
+ * 
  * @namespace ImagePicker
  * @class ImagePickerChrome.DownloadProgressListener
  * @constructor
@@ -670,22 +678,22 @@ ImagePickerChrome.DownloadProgressListener.prototype = {
             this.completedCount = this.completedCount + 1;
             var totalProgress = Math.ceil((this.completedCount / this.totalCount) * 100);
 
-
             if (document) {
                 var downloadMeter = document.getElementById("downloadMeter");
                 var downloadStat = document.getElementById("downloadStat");
 
-                if (downloadMeter) { //check null since the ImagePicker dialog may be closed
+                if (downloadMeter) { // check null since the ImagePicker dialog may be closed
                     downloadMeter.value = totalProgress;
                 }
 
-                if (downloadStat) { //check null since the ImagePicker dialog may be closed
+                if (downloadStat) { // check null since the ImagePicker dialog may be closed
                     downloadStat.label = totalProgress + "%";
                 }
             }
 
-            if ((typeof ImagePicker != "undefined") && (ImagePicker != null)) {  //check null since the ImagePicker dialog may be closed
-                 ImagePicker.Logger.debug("Listener id =" + this.id + ", Downloaded: " + totalProgress);
+            if ((typeof ImagePicker != "undefined") && (ImagePicker != null)) { // check null since the ImagePicker
+                                                                                // dialog may be closed
+                ImagePicker.Logger.debug("Listener id =" + this.id + ", Downloaded: " + totalProgress);
             }
         }
     },

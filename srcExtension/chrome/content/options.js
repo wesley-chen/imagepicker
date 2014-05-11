@@ -43,8 +43,10 @@ ImagePickerChrome.Options = {
         if (enable) {
             showSubfolderNameInUI.disabled = false;
         } else {
+            if(showSubfolderNameInUI.checked == true){
+                showSubfolderNameInUI.click();
+            }
             showSubfolderNameInUI.disabled = true;
-            showSubfolderNameInUI.checked = false;
         }
     },
 
