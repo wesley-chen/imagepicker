@@ -1,0 +1,94 @@
+<?xml version="1.0" ?>
+<project name="ImagePicker" default="package">
+
+    <property name="extension.id" value="ImagePicker@topolog.org" />
+    <property name="extension.version" value="1.8.1" />
+
+    <!-- firefox configruation e.g. env.win.firefox4.0.properties, env.linux.firefox3.6.properties,
+            env.win.firefox-beta.properties, env.win.firefox-nightly.properties-->
+    <property file="env.win.firefox4.0.properties"/>
+
+    <!-- other firefox configruation, e.g. -safe-mode -jsconsole -->
+    <property name="firefox.arg" value=""/>
+
+    <!-- Project directories -->
+    <property name="src.dir" location="./srcExtension" />
+    <property name="build.dir" location="./build" />
+    <property name="dist.dir" location="./dist" />
+
+    <condition property="firefox.present">
+        <and>
+            <isset property="firefox.dir" />
+            <available file="${firefox.dir}" type="dir" />
+        </and>
+    </condition>
+
+    <!-- Custom tasks -->
+    <target name="init">
+        <echoproperties>
+            <propertyset>
+                <propertyref prefix="extension." />
+                <propertyref prefix="firefox." />
+            </propertyset>
+        </echoproperties>
+
+        <!-- Clean all folders/files under build directory-->
+        <delete includeEmptyDirs="true">
+            <fileset dir="${build.dir}" includes="**/*"/>
+        </delete>
+    </target>
+
+    <target name="version">
+        <!-- update build number-->
+        <buildnumber />
+        <replaceregexp file="${src.dir}/install.rdf" byline="true">
+            <regexp pattern="em:version&gt;(.*)&lt;"/>
+            <substitution expression="em:version&gt;${extension.version}&lt;" />
+        </replaceregexp>
+        <replaceregexp file="${src.dir}/chrome/content/about.xul" byline="true">
+            <regexp pattern="about_version.label;(.*)&quot;"/>
+            <substitution expression="about_version.label; ${extension.version}-b${build.number}&quot;" />
+        </replaceregexp>
+    </target>
+
+    <target name="install" depends="init, version">
+        <fail unless="firefox.present"/>
+        <!-- copy extension proxy file to extensions directory -->
+        <copy file="${basedir}/${extension.id}" todir="${firefox.profile.path}/extensions" overwrite="true" verbose="true">
+          <filterset>
+            <filter token="EXTENSION_SRC_LOCATION" value="${src.dir}"/>
+          </filterset>
+        </copy>
+
+        <!-- touch src.dir for change install.rdf (windows only)-->
+        <mkdir dir="${src.dir}\temp"/>
+        <delete dir="${src.dir}\temp"/>
+    </target>
+
+    <target name="test" depends="install" description="run FireFox with this extension for testing">
+        <exec executable="${firefox.exe}" spawn="true">
+            <arg line="-no-remote ${firefox.arg} -profile ${firefox.profile.path}"/>
+        </exec>
+    </target>
+
+    <target name="build" description="prepare file for release" depends="init, version">
+         <copy todir="${build.dir}" >
+             <fileset dir="${src.dir}" />
+         </copy>
+        <replace file="${build.dir}/modules/common.js" value="enabledLog : false" summary="true" >
+            <replacetoken>enabledLog : true</replacetoken>
+        </replace>
+    </target>
+
+
+    <target name="package" description="package xpi file for release" depends="build">
+        <delete file="${dist.dir}/${ant.project.name}-v${extension.version}.xpi" failonerror="true" />
+        <zip destfile="${dist.dir}/${ant.project.name}-v${extension.version}.xpi">
+            <zipfileset dir="${build.dir}/chrome" includes="**" prefix="chrome" />
+            <zipfileset dir="${build.dir}/defaults" includes="**" prefix="defaults" />
+            <zipfileset dir="${build.dir}/modules" includes="**" prefix="modules" />
+            <zipfileset dir="${build.dir}" includes="install.rdf" />
+            <zipfileset dir="${build.dir}" includes="chrome.manifest" />
+        </zip>
+    </target>
+</project>

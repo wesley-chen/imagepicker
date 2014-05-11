@@ -1,0 +1,122 @@
+/*  skin/toolbar-button.css  */
+
+/*  image-pick-buttons css  */
+#ipbuttons-toolbar {
+    list-style-image: url("chrome://imagepicker/skin/img-picker_24.png");
+}
+
+toolbar[iconsize ="small"] #ipbuttons-toolbar {
+    list-style-image: url("chrome://imagepicker/skin/img-picker_16.png");
+}
+
+.ip-buttons {
+    list-style-image: url("chrome://imagepicker/skin/img-picker_16.png");
+}
+
+/* ip-button-1 css */
+#ipbutton-simple-toolbar {
+    list-style-image: url("chrome://imagepicker/skin/img-picker-p1_24.png");
+}
+
+toolbar[iconsize ="small"] #ipbutton-simple-toolbar {
+    list-style-image: url("chrome://imagepicker/skin/img-picker-p1_16.png");
+}
+
+.ip-button-1 {
+    list-style-image: url("chrome://imagepicker/skin/img-picker-p1_16.png");
+}
+
+/* ip-button-all css */
+#ipbutton-all-toolbar {
+    list-style-image: url("chrome://imagepicker/skin/img-picker-all_24.png");
+}
+
+toolbar[iconsize ="small"] #ipbutton-all-toolbar {
+    list-style-image: url("chrome://imagepicker/skin/img-picker-all_16.png");
+}
+
+.ip-button-all {
+    list-style-image: url("chrome://imagepicker/skin/img-picker-all_16.png");
+}
+
+/* ip-button-right css */
+#ipbutton-right-toolbar {
+    list-style-image: url("chrome://imagepicker/skin/img-picker-right_24.png");
+}
+
+toolbar[iconsize ="small"] #ipbutton-right-toolbar {
+    list-style-image: url("chrome://imagepicker/skin/img-picker-right_16.png");
+}
+
+.ip-button-right {
+    list-style-image: url("chrome://imagepicker/skin/img-picker-right_16.png");
+}
+
+/* ip-button-left css */
+#ipbutton-left-toolbar {
+    list-style-image: url("chrome://imagepicker/skin/img-picker-left_24.png");
+}
+
+toolbar[iconsize ="small"] #ipbutton-left-toolbar {
+    list-style-image: url("chrome://imagepicker/skin/img-picker-left_16.png");
+}
+
+.ip-button-left {
+    list-style-image: url("chrome://imagepicker/skin/img-picker-left_16.png");
+}
+
+/* dynamic menu item css */
+.dynamic-pick-menu-item {
+    list-style-image: url("chrome://imagepicker/skin/light_16.png");
+}
+
+/* configure menu item css */
+.configure-menu-item {
+    list-style-image: url("chrome://imagepicker/skin/configure-16.png");
+}
+
+
+/* for notification popup */
+.popup-notification-icon[popupid="ImagePickerAlert"] {
+  list-style-image: url("chrome://imagepicker/skin/img-picker_32.png");
+}
+
+/*  css for image cell  */
+.image-cell {
+    margin: 5px;
+    border: #98989A solid 1px;
+    background-color: #F3F3F3;
+}
+
+.image-cell-highlight {
+  -moz-box-shadow: 0 0 2px 1px rgba(40, 120, 212, 0.7) inset, 0 0 3px 1px #2878D4, 0 1px 2px rgba(0, 0, 0, 0.7) inset;
+}
+
+.image-cell-selected  {
+   border:#62B8C6 solid 1px;
+}
+
+/*  css for image box  */
+.image-box {
+    margin: 4px;
+}
+
+.image-cell-selected .image-box {
+   /*  -moz-box-shadow: 3px 3px 5px black;   */
+}
+
+/*  css for additional info box, not use  */
+.ad-box {
+    margin-bottom: 0px;
+}
+
+/*  css for checkbox, not use  */
+.image-cell checkbox {
+    margin-bottom: 0px;
+}
+
+.note {
+  padding: 2px 0px 3px 0px;
+  margin-top: 20px;
+  font-weight: bold;
+}

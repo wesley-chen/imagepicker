@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://imagepicker/skin/ip.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://imagepicker/locale/ImagePicker.dtd">
+
+<overlay id="ipOverlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+    <script type="application/x-javascript" src="chrome://imagepicker/content/common.js" />
+    <script type="application/x-javascript" src="chrome://imagepicker/content/images.js" />
+    <script type="application/x-javascript" src="chrome://imagepicker/content/ipOverlay.js" />
+    <script type="application/x-javascript" src="chrome://imagepicker/content/notification.js" />
+    <script type="application/x-javascript" src="chrome://imagepicker/content/collector.js" />
+
+    <stringbundleset id="stringbundleset">
+        <stringbundle id="ip-string-bundle" src="chrome://imagepicker/locale/ImagePicker.properties" />
+    </stringbundleset>
+
+    <toolbarpalette id="BrowserToolbarPalette">
+        <toolbarbutton id="ipbuttons-toolbar" class="toolbarbutton-1 ip-buttons" type="menu-button"
+            label="&toolbarbutton_pick_images.label;" tooltiptext="&toolbarbutton_pick_images.tooltip;" oncommand="ImagePickerChrome.pickImagesFromCurrentTab(event);">
+            <menupopup id="image-pick-button-popup" onpopupshowing="ImagePickerChrome.onPopupMenuShowing(event);">
+                <menuitem id="ipbtn-menucurrent" label="&toolbarbutton_pick_images.menuitem.currenttab;"
+                    oncommand="ImagePickerChrome.pickImagesFromCurrentTab(event);" class="menuitem-iconic ip-button-1" />
+                <menuitem id="ipbtn-menuall" label="&toolbarbutton_pick_images.menuitem.alltabs;" oncommand="ImagePickerChrome.pickImagesFromAllTabs(event);"
+                    class="menuitem-iconic ip-button-all" />
+                <menuitem id="ipbtn-menuright" label="&toolbarbutton_pick_images.menuitem.righttabs;"
+                    oncommand="ImagePickerChrome.pickImagesFromRightTabs(event);" class="menuitem-iconic ip-button-right" />
+                <menuitem id="ipbtn-menuleft" label="&toolbarbutton_pick_images.menuitem.lefttabs;" oncommand="ImagePickerChrome.pickImagesFromLeftTabs(event);"
+                    class="menuitem-iconic ip-button-left" />
+                <menuseparator id="ipbtn-menuseparator" />
+                <menuitem id="ipbtn-menu-configure" label="&configure_button.label;" oncommand="ImagePickerChrome.openOptionsDialog(event);"
+                    class="menuitem-iconic configure-menu-item" />
+                <menuitem id="ipbtn-menu-configure-doubleclick-save" label="&pref_collector_doubleclick_image_to_save.label;"
+                    oncommand="ImagePickerChrome.enableOrDisablePref(event, 'collector.doubleclickImageToSave.enable');"
+                    class="menuitem-iconic" type="checkbox"/>
+                <menuitem id="ipbtn-menu-configure-drap-save" label="&pref_collector_drag_image_to_save.label;"
+                    oncommand="ImagePickerChrome.enableOrDisablePref(event, 'collector.dragImageToSave.enable');"
+                    class="menuitem-iconic" type="checkbox"/>
+            </menupopup>
+        </toolbarbutton>
+        <toolbarbutton id="ipbutton-simple-toolbar" class="toolbarbutton-1 ip-button-1" label="&toolbarbutton_pick_images.label;"
+            tooltiptext="&toolbarbutton_pick_images_simple.tooltip;" oncommand="ImagePickerChrome.pickImagesFromCurrentTab(event);">
+        </toolbarbutton>
+        <toolbarbutton id="ipbutton-all-toolbar" class="toolbarbutton-1 ip-button-all" label="&toolbarbutton_pick_images.label;"
+            tooltiptext="&toolbarbutton_pick_images.menuitem.alltabs;" oncommand="ImagePickerChrome.pickImagesFromAllTabs(event);">
+        </toolbarbutton>
+        <toolbarbutton id="ipbutton-right-toolbar" class="toolbarbutton-1 ip-button-right" label="&toolbarbutton_pick_images.label;"
+            tooltiptext="&toolbarbutton_pick_images.menuitem.righttabs;" oncommand="ImagePickerChrome.pickImagesFromRightTabs(event);">
+        </toolbarbutton>
+        <toolbarbutton id="ipbutton-left-toolbar" class="toolbarbutton-1 ip-button-left" label="&toolbarbutton_pick_images.label;"
+            tooltiptext="&toolbarbutton_pick_images.menuitem.lefttabs;" oncommand="ImagePickerChrome.pickImagesFromLeftTabs(event);">
+        </toolbarbutton>
+    </toolbarpalette>
+
+    <popup id="contentAreaContextMenu">
+        <menuitem id="ipbutton-simple-context" label="&menu_pick_images.label;" accesskey="p" insertafter="context-sep-ip"
+            class="menuitem-iconic ip-button-1" oncommand="ImagePickerChrome.pickImagesFromCurrentTab(event);" hidden="false">
+        </menuitem>
+        <menuitem id="ipbutton-all-context" label="&toolbarbutton_pick_images.menuitem.alltabs;" oncommand="ImagePickerChrome.pickImagesFromAllTabs(event);"
+            class="menuitem-iconic ip-button-all" hidden="true"/>
+        <menuitem id="ipbutton-right-context" label="&toolbarbutton_pick_images.menuitem.righttabs;"
+            oncommand="ImagePickerChrome.pickImagesFromRightTabs(event);" class="menuitem-iconic ip-button-right" hidden="true"/>
+        <menuitem id="ipbutton-left-context" label="&toolbarbutton_pick_images.menuitem.lefttabs;" oncommand="ImagePickerChrome.pickImagesFromLeftTabs(event);"
+            class="menuitem-iconic ip-button-left" hidden="true"/>
+        <menu id="ipbuttons-context" class="menu-iconic ip-buttons" label="&menu_pick_images.label;" hidden="false">
+            <menupopup id="image-pick-button-popup-context" onpopupshowing="ImagePickerChrome.onPopupMenuShowing(event);">
+                <menuitem id="ipbtn-menucurrent-context" label="&toolbarbutton_pick_images.menuitem.currenttab;"
+                    oncommand="ImagePickerChrome.pickImagesFromCurrentTab(event);" class="menuitem-iconic ip-button-1" />
+                <menuitem id="ipbtn-menuall-context" label="&toolbarbutton_pick_images.menuitem.alltabs;"
+                    oncommand="ImagePickerChrome.pickImagesFromAllTabs(event);" class="menuitem-iconic ip-button-all" />
+                <menuitem id="ipbtn-menuright-context" label="&toolbarbutton_pick_images.menuitem.righttabs;"
+                    oncommand="ImagePickerChrome.pickImagesFromRightTabs(event);" class="menuitem-iconic ip-button-right" />
+                <menuitem id="ipbtn-menuleft-context" label="&toolbarbutton_pick_images.menuitem.lefttabs;"
+                    oncommand="ImagePickerChrome.pickImagesFromLeftTabs(event);" class="menuitem-iconic ip-button-left" />
+                <menuseparator id="ipbtn-menuseparator" />
+                <menuitem id="ipbtn-menu-configure" label="&configure_button.label;" oncommand="ImagePickerChrome.openOptionsDialog(event);"
+                    class="menuitem-iconic configure-menu-item" />
+                <menuitem id="ipbtn-menu-configure-doubleclick-save" label="&pref_collector_doubleclick_image_to_save.label;"
+                    oncommand="ImagePickerChrome.enableOrDisablePref(event, 'collector.doubleclickImageToSave.enable');"
+                    class="menuitem-iconic" type="checkbox"/>
+                <menuitem id="ipbtn-menu-configure-drap-save" label="&pref_collector_drag_image_to_save.label;"
+                    oncommand="ImagePickerChrome.enableOrDisablePref(event, 'collector.dragImageToSave.enable');"
+                    class="menuitem-iconic" type="checkbox"/>
+            </menupopup>
+        </menu>
+    </popup>
+</overlay>

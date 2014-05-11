@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<RDF:RDF xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:NC="http://home.netscape.com/NC-rdf#"
+         xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+<RDF:Description RDF:about="urn:mozilla:install-manifest">
+    <em:id>ImagePicker@topolog.org</em:id>
+    <em:name>Image Picker</em:name>
+    <em:description>Choose (filter) images and save images from web page to local disk.</em:description>
+    <em:version>1.8.1</em:version>
+    <em:type>2</em:type> <!-- 2 : Extensions -->
+    <em:homepageURL>https://addons.mozilla.org/firefox/addon/235863</em:homepageURL>
+    <em:optionsURL>chrome://imagepicker/content/options.xul</em:optionsURL>
+    <em:iconURL>chrome://imagepicker/skin/img-picker_24.png</em:iconURL>
+    <em:creator>Wesley Chen (topolog@gmail.com)</em:creator>
+    <em:unpack>true</em:unpack>
+
+     <!-- Firefox -->
+    <em:targetApplication>
+        <RDF:Description>
+            <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+            <em:minVersion>4.0</em:minVersion>
+            <em:maxVersion>27.*</em:maxVersion>
+        </RDF:Description>
+    </em:targetApplication>
+
+    <em:localized>
+      <RDF:Description>
+        <em:locale>zh-CN</em:locale>
+        <em:name>集图工具(Image Picker)</em:name>
+        <em:description>从浏览中的网页中，过滤并选择喜爱的图片保存。</em:description>
+        <em:creator>Wesley Chen (topolog@gmail.com)</em:creator>
+        <em:homepageURL>https://addons.mozilla.org/firefox/addon/235863</em:homepageURL>
+      </RDF:Description>
+    </em:localized>
+
+    <em:localized>
+      <RDF:Description>
+        <em:locale>zh-TW</em:locale>
+        <em:name>集圖工具(Image Picker)</em:name>
+        <em:description>從瀏覽中的網頁中，過濾並選擇喜愛的圖片保存。</em:description>
+        <em:creator>Wesley Chen (topolog@gmail.com)</em:creator>
+        <em:homepageURL>https://addons.mozilla.org/firefox/addon/235863</em:homepageURL>
+      </RDF:Description>
+    </em:localized>
+
+</RDF:Description>
+</RDF:RDF>

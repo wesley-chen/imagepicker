@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://imagepicker/locale/ImagePicker.dtd">
+
+<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" id="titleManagementDialog"
+    title="&title_management_dialog.title;" buttons="accept"
+    style="width:600px;" persist="width height"
+    onload="ImagePickerChrome.TitleManager.onLoad();"
+    ondialogaccept="ImagePickerChrome.TitleManager.onDialogAccept();">
+
+    <script type="application/x-javascript" src="chrome://imagepicker/content/common.js" />
+    <script type="application/x-javascript" src="chrome://imagepicker/content/titleManagement.js" />
+
+    <groupbox>
+        <caption label="&title_management_remove_text_from_title_textbox.label;" />
+        <textbox multiline="true"  cols="80" rows="12" id="removeTextTB"/>
+        <hbox align="center" style="border: 1px blue;">
+            <label value="&title_management_remove_text_from_title_menulist.label;" />
+            <menulist editable="true" flex="1" id="removeTextMenulist">
+              <menupopup>
+              </menupopup>
+            </menulist>
+            <button label="&title_management_remove_text_from_title_button.label;" oncommand="ImagePickerChrome.TitleManager.addRemoveText();"
+                    tooltiptext="&title_management_remove_text_from_title_button.tooltip;"  id="removeTextBtn"/>
+        </hbox>
+    </groupbox>
+
+</dialog>

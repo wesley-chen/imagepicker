@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://imagepicker/skin/ip.css" type="text/css"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://imagepicker/locale/ImagePicker.dtd">
+
+<prefwindow id="imagepicker-prefs" title="&options_dialog.title;"
+     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+     buttons="accept,cancel,extra2"
+     buttonlabelextra2="&pref_button_extra2_label;"
+     onload="ImagePickerChrome.Options.onLoad();"
+     ondialogaccept="ImagePickerChrome.Options.onDialogAccept();"
+     onunload="ImagePickerChrome.Options.onDialogClose();"
+     ondialogextra2="ImagePickerChrome.Options.restoreAll();"
+     style="min-width:500px;"
+     persist="lastSelected screenX screenY">
+
+    <stringbundleset id="stringbundleset">
+        <stringbundle id="ip-string-bundle" src="chrome://imagepicker/locale/ImagePicker.properties" />
+    </stringbundleset>
+
+    <prefpane id="paneBatchDownload" label="&pref_paneBatchDownload.label;" image="chrome://imagepicker/skin/option-mdownload32.png">
+      <preferences>
+        <preference id="pref-createdFolderByTitle" name="extensions.imagepicker.createdFolderByTitle" type="bool" />
+        <preference id="pref-showSubfolderNameConfirmationPopup" name="extensions.imagepicker.showSubfolderNameConfirmationPopup" type="bool" />
+        <preference id="pref-removeTextFromTitle" name="extensions.imagepicker.removeTextFromTitle" type="unichar"/>
+        <preference id="pref-renamingEnable" name="extensions.imagepicker.renamingEnable" type="bool" />
+        <preference id="pref-renamingMask" name="extensions.imagepicker.renamingMask" type="string" />
+        <preference id="pref-openExplorerAfterSaved" name="extensions.imagepicker.openExplorerAfterSaved" type="bool" />
+        <preference id="pref-closeImagePickerAfterSaved" name="extensions.imagepicker.closeImagePickerAfterSaved" type="bool" />
+        <preference id="pref-closeBrowserTabAfterSaved" name="extensions.imagepicker.closeBrowserTabAfterSaved" type="bool" />
+      </preferences>
+      <vbox>
+            <groupbox>
+                <caption label="&pref_after_saved_behavior.label;" />
+                <checkbox label="&pref_open_explorer_after_saved.label;" preference="pref-openExplorerAfterSaved" />
+                <checkbox label="&pref_close_image_picker_after_saved.label;" preference="pref-closeImagePickerAfterSaved" />
+                <checkbox label="&pref_close_browser_tab_after_saved.label;" preference="pref-closeBrowserTabAfterSaved" />
+            </groupbox>
+            <groupbox>
+                <caption label="&pref_folder_creation.label;" />
+                <hbox>
+                    <checkbox label="&pref_created_folder_by_title.label;" preference="pref-createdFolderByTitle"
+                              oncommand="ImagePickerChrome.Options.selectCreatedFolderByTitle(event);"/>
+                    <label id="titleMgrLink" class="text-link" value="&pref_remove_text_from_title_link;" onclick="ImagePickerChrome.Options.openTitleManagementDialog(event);" />
+                </hbox>
+                <checkbox label="&pref_display_subfolder_ui.label;" preference="pref-showSubfolderNameConfirmationPopup"
+                          id="showSubfolderNameInUI"/>
+            </groupbox>
+            <groupbox>
+                 <caption label="&pref_file_creation.label;" />
+                 <hbox>
+                     <checkbox label="&pref_rename_image_enable;" preference="pref-renamingEnable" oncommand="ImagePickerChrome.Options.enableOrDisableRenamingElements(this.checked);"/>
+                     <textbox id="renamingMaskTextbox" preference="pref-renamingMask" style="width: 300px;"/>
+                 </hbox>
+                 <label value="&pref_rename_tags_desc;" style="font-weight:bold; margin-left: 26px;"/>
+                 <grid pack="center" style="margin-left: 26px;">
+                        <columns>
+                            <column width="150"/>
+                            <column />
+                        </columns>
+                        <rows>
+                            <row>
+                                <label value="&pref_rename_tag_seq_num;"/>
+                                <label value="&pref_rename_tag_seq_num_desc;"/>
+                            </row>
+                            <row>
+                                <label value="&pref_rename_tag_date;"/>
+                                <label value="&pref_rename_tag_date_desc;"/>
+                            </row>
+                            <row>
+                                <label value="&pref_rename_tag_datetime;"/>
+                                <label value="&pref_rename_tag_datetime_desc;"/>
+                            </row>
+                            <row>
+                                <label value="&pref_rename_tag_tabtitle;"/>
+                                <label value="&pref_rename_tag_tabtitle_desc;"/>
+                            </row>
+                            <row>
+                                <label value="&pref_rename_tag_name;"/>
+                                <label value="&pref_rename_tag_name_desc;"/>
+                            </row>
+                          </rows>
+                     </grid>
+              </groupbox>
+      </vbox>
+    </prefpane>
+        <prefpane id="paneSingleDownload" label="&pref_paneSingleDownload.label;" image="chrome://imagepicker/skin/option-mouse32.png">
+          <preferences>
+            <preference id="pref-collectorDoubleclickImageToSaveEnable" name="extensions.imagepicker.collector.doubleclickImageToSave.enable" type="bool" />
+            <preference id="pref-collectorDragImageToSaveEnable" name="extensions.imagepicker.collector.dragImageToSave.enable" type="bool" />
+            <preference id="pref-collectorSavedSingleImageToFolder" name="extensions.imagepicker.collector.savedSingleImageToFolder" type="unichar" />
+            <preference id="pref-collectorCreatedFolderByTitle" name="extensions.imagepicker.collector.createdFolderByTitle" type="bool" />
+          </preferences>
+          <vbox>
+            <groupbox>
+                <caption label="&pref_mouse_behavior.label;" tooltiptext="&pref_mouse_behavior.tooltip;"/>
+                <label value="&pref_mouse_behavior.tooltip;"/>
+                <checkbox label="&pref_collector_doubleclick_image_to_save.label;" preference="pref-collectorDoubleclickImageToSaveEnable" />
+                <checkbox label="&pref_collector_drag_image_to_save.label;" preference="pref-collectorDragImageToSaveEnable" />
+            </groupbox>
+            <groupbox>
+                <caption label="&pref_save_image_to.label;"/>
+                <radiogroup>
+                    <vbox style="border:1px groove #b9ae9d">
+                         <hbox >
+                           <radio id="ipFolderRadio" label="&pref_save_image_to_folder.label;" oncommand="ImagePickerChrome.Options.enableOrDisableIpFolderElements(true);"/>
+                           <textbox id="ipFolderTextbox" style="width:300px" preference="pref-collectorSavedSingleImageToFolder"/>
+                           <toolbarbutton id="ipFolderButton" oncommand="ImagePickerChrome.Options.browseDir();"
+                               image="chrome://imagepicker/skin/browse.png" />
+                         </hbox>
+                         <hbox >
+                             <checkbox id="ipFolderCheckbox" label="&pref_created_folder_by_title.label;" preference="pref-collectorCreatedFolderByTitle" style="margin-left: 23px;"/>
+                             <label id="titleMgrLink" class="text-link" value="&pref_remove_text_from_title_link;" onclick="ImagePickerChrome.Options.openTitleManagementDialog(event);" />
+                         </hbox>
+                     </vbox>
+                     <radio id="askMeRadio" label="&pref_save_image_to_askme.label;" oncommand="ImagePickerChrome.Options.enableOrDisableIpFolderElements(false);"/>
+                     <radio id="askMePerTabRadio" label="&pref_save_image_to_askme_pertab.label;" oncommand="ImagePickerChrome.Options.enableOrDisableIpFolderElements(false);"/>
+                </radiogroup>
+            </groupbox>
+        </vbox>
+    </prefpane>
+    <prefpane id="paneUI" label="&pref_paneUI.label;" image="chrome://imagepicker/skin/option-setting32.png">
+          <preferences>
+            <preference id="pref-ipButtonsShowOnToolbar" name="extensions.imagepicker.ui.ipbuttons.toolbar.show" type="bool" />
+            <preference id="pref-ipButtonSimpleShowOnToolbar" name="extensions.imagepicker.ui.ipbutton-simple.toolbar.show" type="bool" />
+            <preference id="pref-ipButtonAllShowOnToolbar" name="extensions.imagepicker.ui.ipbutton-all.toolbar.show" type="bool" />
+            <preference id="pref-ipButtonRightShowOnToolbar" name="extensions.imagepicker.ui.ipbutton-right.toolbar.show" type="bool" />
+            <preference id="pref-ipButtonLeftShowOnToolbar" name="extensions.imagepicker.ui.ipbutton-left.toolbar.show" type="bool" />
+
+            <preference id="pref-ipButtonsShowOnContextMenu" name="extensions.imagepicker.ui.ipbuttons.contextmenu.show" type="bool" />
+            <preference id="pref-ipButtonSimpleShowOnContextMenu" name="extensions.imagepicker.ui.ipbutton-simple.contextmenu.show" type="bool" />
+            <preference id="pref-ipButtonAllShowOnContextMenu" name="extensions.imagepicker.ui.ipbutton-all.contextmenu.show" type="bool" />
+            <preference id="pref-ipButtonRightShowOnContextMenu" name="extensions.imagepicker.ui.ipbutton-right.contextmenu.show" type="bool" />
+            <preference id="pref-ipButtonLeftShowOnContextMenu" name="extensions.imagepicker.ui.ipbutton-left.contextmenu.show" type="bool" />
+
+            <preference id="pref-notificationFirefoxBuildin" name="extensions.imagepicker.ui.notification.firefox-buildin" type="bool" />
+          </preferences>
+          <vbox>
+             <groupbox>
+                <caption label="&pref_ui_buttons.label;" />
+                <grid pack="center">
+                    <columns>
+                        <column width="8"/>
+                        <column />
+                        <column width="8"/>
+                        <column width="150"/>
+                        <column />
+                    </columns>
+                    <rows>
+                        <row>
+                            <label value=""/>
+                            <label value=""/>
+                            <label value=""/>
+                            <label value="&pref_show_on_toolbar.label;"/>
+                            <label value="&pref_show_on_contextmenu.label;"/>
+                        </row>
+                        <row>
+                            <label value=""/>
+                            <toolbarbutton class="toolbarbutton-1 ip-buttons" tooltiptext="&toolbarbutton_pick_images.tooltip;" disabled="true" type="menu-button"/>
+                            <label value=""/>
+                            <checkbox preference="pref-ipButtonsShowOnToolbar" />
+                            <checkbox preference="pref-ipButtonsShowOnContextMenu" />
+                        </row>
+                        <row>
+                            <label value=""/>
+                            <toolbarbutton class="toolbarbutton-1 ip-button-1" style="width=100px; margin-left=52px;" tooltiptext="&toolbarbutton_pick_images_simple.tooltip;" disabled="true"/>
+                            <label value=""/>
+                            <checkbox preference="pref-ipButtonSimpleShowOnToolbar" />
+                            <checkbox preference="pref-ipButtonSimpleShowOnContextMenu" />
+                        </row>
+                        <row>
+                            <label value=""/>
+                            <toolbarbutton class="toolbarbutton-1 ip-button-all" tooltiptext="&toolbarbutton_pick_images.menuitem.alltabs;" disabled="true"/>
+                            <label value=""/>
+                            <checkbox preference="pref-ipButtonAllShowOnToolbar" />
+                            <checkbox preference="pref-ipButtonAllShowOnContextMenu" />
+                        </row>
+                        <row>
+                            <label value=""/>
+                            <toolbarbutton class="toolbarbutton-1 ip-button-right" tooltiptext="&toolbarbutton_pick_images.menuitem.righttabs;" disabled="true"/>
+                            <label value=""/>
+                            <checkbox preference="pref-ipButtonRightShowOnToolbar" />
+                            <checkbox preference="pref-ipButtonRightShowOnContextMenu" />
+                        </row>
+                        <row>
+                            <label value=""/>
+                            <toolbarbutton class="toolbarbutton-1 ip-button-left" tooltiptext="&toolbarbutton_pick_images.menuitem.lefttabs;" disabled="true"/>
+                            <label value=""/>
+                            <checkbox preference="pref-ipButtonLeftShowOnToolbar" />
+                            <checkbox preference="pref-ipButtonLeftShowOnContextMenu" />
+                        </row>
+                    </rows>
+                </grid>
+            </groupbox>
+            <checkbox label="&pref_use_firfox_buildin_notification.label;" preference="pref-notificationFirefoxBuildin" />
+        </vbox>
+    </prefpane>
+    <script type="application/x-javascript" src="common.js" />
+    <script type="application/x-javascript" src="options.js" />
+</prefwindow>

@@ -1,0 +1,104 @@
+<!ENTITY toolbarbutton_pick_images.label "拾图">
+<!ENTITY toolbarbutton_pick_images.tooltip "拾图，并下载到本地">
+<!ENTITY toolbarbutton_pick_images_simple.label "拾图">
+<!ENTITY toolbarbutton_pick_images_simple.tooltip "从当前标签页拾图">
+<!ENTITY toolbarbutton_pick_images.menuitem.currenttab "从当前标签页拾图">
+<!ENTITY toolbarbutton_pick_images.menuitem.alltabs "从所有标签页拾图">
+<!ENTITY toolbarbutton_pick_images.menuitem.righttabs "从右边标签页拾图">
+<!ENTITY toolbarbutton_pick_images.menuitem.lefttabs "从左边标签页拾图">
+
+<!ENTITY menu_pick_images.label "拾图">
+
+<!ENTITY options_dialog.title "Image Picker 选项" >
+<!ENTITY pref_button_extra2_label "恢复默认配置">
+
+<!ENTITY pref_folder_creation.label "创建目录">
+<!ENTITY pref_created_folder_by_title.label "按标题自动创建保存目录">
+<!ENTITY pref_display_subfolder_ui.label "在界面上显示要创建的子目录">
+<!ENTITY pref_remove_text_from_title_link "自动删除部分标题">
+
+<!ENTITY title_management_dialog.title "自动删除部分标题">
+<!ENTITY title_management_remove_text_from_title_textbox.label "当按标题创建目录时，下面的内容将会被自动删除">
+<!ENTITY title_management_remove_text_from_title_menulist.label "要删除的内容：">
+<!ENTITY title_management_remove_text_from_title_button.label "添加">
+<!ENTITY title_management_remove_text_from_title_button.tooltip "添加要删除的内容">
+
+
+<!ENTITY pref_file_creation.label "创建文件">
+<!ENTITY pref_rename_image_enable "按指定的标记重命名图片">
+<!ENTITY pref_rename_tags_desc "重命名标记">
+<!ENTITY pref_rename_tag_seq_num "&lt;seq_num&gt;">
+<!ENTITY pref_rename_tag_seq_num_desc "按图片的出现顺序，自动重命名图片, 例如： 001, 002, 003 ...">
+<!ENTITY pref_rename_tag_date "&lt;date&gt;">
+<!ENTITY pref_rename_tag_date_desc "当前日期, 例如：2013-09-21">
+<!ENTITY pref_rename_tag_datetime "&lt;datetime&gt;">
+<!ENTITY pref_rename_tag_datetime_desc "当前日期和时间, 例如：2013-09-21 23_16_02">
+<!ENTITY pref_rename_tag_tabtitle "&lt;tab_title&gt;">
+<!ENTITY pref_rename_tag_tabtitle_desc "每个标签页的标题">
+<!ENTITY pref_rename_tag_name "&lt;name&gt;">
+<!ENTITY pref_rename_tag_name_desc "原始图片名">
+
+<!ENTITY pref_after_saved_behavior.label "保存后">
+<!ENTITY pref_open_explorer_after_saved.label "自动打开文件浏览器">
+<!ENTITY pref_open_download_manager_after_saved.label "自动打开下载管理器">
+<!ENTITY pref_close_image_picker_after_saved.label "自动关闭拾图对话框">
+<!ENTITY pref_close_browser_tab_after_saved.label "自动关闭标签页">
+<!ENTITY pref_notes.label "注意：需要重新打开 Image Picker，配置才能生效。">
+
+<!ENTITY pref_paneGeneral.label "常规">
+<!ENTITY pref_paneBatchDownload.label "批量图片下载">
+<!ENTITY pref_paneSingleDownload.label "单个图片下载">
+<!ENTITY pref_paneUI.label "界面 ">
+
+<!ENTITY pref_ui_buttons.label "按钮显示">
+<!ENTITY pref_show_on_toolbar.label "在工具栏显示">
+<!ENTITY pref_show_on_contextmenu.label "在右键菜单显示">
+<!ENTITY pref_use_firfox_buildin_notification.label "使用火狐内置的提示方式（在中间显示）">
+
+<!ENTITY pref_mouse_behavior.label "鼠标">
+<!ENTITY pref_mouse_behavior.tooltip "可在浏览网页时，快速保存单张图片">
+<!ENTITY pref_collector_doubleclick_image_to_save.label "双击图片时保存">
+<!ENTITY pref_collector_drag_image_to_save.label "拖动图片时保存">
+<!ENTITY pref_save_image_to.label "保存图片至">
+<!ENTITY pref_save_image_to_folder.label "目录">
+<!ENTITY pref_save_image_to_askme.label "总是询问保存图片的位置">
+<!ENTITY pref_save_image_to_askme_pertab.label "只在保存第一个图片时，询问保存图片的位置">
+
+
+<!ENTITY pick_window.title "拾图">
+<!ENTITY pick_size_limits.label "大小限制">
+<!ENTITY pick_min_size.label "文件大于">
+<!ENTITY pick_min_width.label "最小宽度">
+<!ENTITY pick_min_height.label "最小高度">
+<!ENTITY pick_image_types.label "图片类型">
+<!ENTITY pick_button_filter.label "筛选">
+<!ENTITY pick_button_filter.tooltip "根据图片的大小和类型筛选图片并显示">
+<!ENTITY pick_button_view.label "查看">
+<!ENTITY pick_button_showall.label "显示所有">
+<!ENTITY pick_button_showall.tooltip "显示所有图片（忽略所有限制）">
+<!ENTITY pick_menu_thumbnails_small.label "缩略图（小）">
+<!ENTITY pick_menu_thumbnails_normal.label "缩略图（中）">
+<!ENTITY pick_menu_thumbnails_large.label "缩略图（大）">
+<!ENTITY pick_menu_show_image_size.label "显示图片大小">
+<!ENTITY pick_menu_show_image_name.label "显示图片名称">
+<!ENTITY pick_saved_directory.label "保存目录">
+<!ENTITY pick_clear_saved_directories.label "清除所有目录">
+<!ENTITY pick_browse.tooltip "浏览...">
+<!ENTITY pick_button_save.label "保存">
+<!ENTITY pick_button_save.tooltip "保存选择的图片">
+<!ENTITY pick_button_close.label "关闭">
+<!ENTITY download_progress.tooltip "打开下载管理器">
+<!ENTITY configure_button.label "配置">
+<!ENTITY configure_button.tooltip "设置">
+<!ENTITY about_button.tooltip "关于 Image Picker">
+
+<!ENTITY pick_contex_menu_select_similar.label "选择相似的">
+<!ENTITY pick_contex_menu_select_all.label "全选">
+<!ENTITY pick_contex_menu_unselect_all.label "全不选">
+
+<!ENTITY about_dialog.title "关于 Image Picker">
+<!ENTITY about_extension_name.label "集图工具 （Image Picker）">
+<!ENTITY about_extension_desc.label "方便易用的集图工具，从浏览中的网页中，过滤并选择喜爱的图片保存。">
+<!ENTITY about_version.label "版本">
+<!ENTITY about_creator.label "创建者">
+<!ENTITY about_homepage.label "访问主页">

@@ -1,0 +1,103 @@
+<!ENTITY toolbarbutton_pick_images.label "Pick Images">
+<!ENTITY toolbarbutton_pick_images.tooltip "Pick Images">
+<!ENTITY toolbarbutton_pick_images_simple.label "Pick Images">
+<!ENTITY toolbarbutton_pick_images_simple.tooltip "Pick images from current tab">
+<!ENTITY toolbarbutton_pick_images.menuitem.currenttab "Pick images from current tab">
+<!ENTITY toolbarbutton_pick_images.menuitem.alltabs "Pick images from all tabs">
+<!ENTITY toolbarbutton_pick_images.menuitem.righttabs "Pick images from right tabs">
+<!ENTITY toolbarbutton_pick_images.menuitem.lefttabs "Pick images from left tabs">
+
+<!ENTITY menu_pick_images.label "Pick Images">
+
+<!ENTITY options_dialog.title "Image Picker preferences" >
+<!ENTITY pref_button_extra2_label "Restore Default Settings">
+
+<!ENTITY pref_folder_creation.label "Folder Creation">
+<!ENTITY pref_created_folder_by_title.label "Create saved folder by title">
+<!ENTITY pref_display_subfolder_ui.label "Display subfolder in UI">
+<!ENTITY pref_remove_text_from_title_link "Remove text from title">
+
+<!ENTITY title_management_dialog.title "Tab title management">
+<!ENTITY title_management_remove_text_from_title_textbox.label "The following text will be removed from title automatically">
+<!ENTITY title_management_remove_text_from_title_menulist.label "Remove text:">
+<!ENTITY title_management_remove_text_from_title_button.label "Add">
+<!ENTITY title_management_remove_text_from_title_button.tooltip "Add text to be removed from title">
+
+<!ENTITY pref_file_creation.label "File Creation">
+<!ENTITY pref_rename_image_enable "Rename image by masks">
+<!ENTITY pref_rename_tags_desc "Renaming Tags">
+<!ENTITY pref_rename_tag_seq_num "&lt;seq_num&gt;">
+<!ENTITY pref_rename_tag_seq_num_desc "Sequence number, e.g. 001, 002, 003 ...">
+<!ENTITY pref_rename_tag_date "&lt;date&gt;">
+<!ENTITY pref_rename_tag_date_desc "Current date, e.g. 2013-09-21">
+<!ENTITY pref_rename_tag_datetime "&lt;datetime&gt;">
+<!ENTITY pref_rename_tag_datetime_desc "Current date and time, e.g. 2013-09-21 23_16_02">
+<!ENTITY pref_rename_tag_tabtitle "&lt;tab_title&gt;">
+<!ENTITY pref_rename_tag_tabtitle_desc "Title from browser tab">
+<!ENTITY pref_rename_tag_name "&lt;name&gt;">
+<!ENTITY pref_rename_tag_name_desc "Original image name">
+
+<!ENTITY pref_after_saved_behavior.label "After saved">
+<!ENTITY pref_open_explorer_after_saved.label "Open Explorer automatically">
+<!ENTITY pref_open_download_manager_after_saved.label "Open Download Manager automatically">
+<!ENTITY pref_close_image_picker_after_saved.label "Close Image Picker automatically">
+<!ENTITY pref_close_browser_tab_after_saved.label "Close Browser Tab automatically">
+<!ENTITY pref_notes.label "NOTE: You must re-open the Image Picker dialog for the changes to take effect">
+
+<!ENTITY pref_paneGeneral.label "General">
+<!ENTITY pref_paneBatchDownload.label "Batch Download">
+<!ENTITY pref_paneSingleDownload.label "Single Download">
+<!ENTITY pref_paneUI.label "UI">
+
+<!ENTITY pref_ui_buttons.label "Buttons">
+<!ENTITY pref_show_on_toolbar.label "Show on Toolbar">
+<!ENTITY pref_show_on_contextmenu.label "Show on Context Menu">
+<!ENTITY pref_use_firfox_buildin_notification.label "Use Firefox build-in notification (Center)">
+
+<!ENTITY pref_mouse_behavior.label "Mouse">
+<!ENTITY pref_mouse_behavior.tooltip "Save image quickly when browsing">
+<!ENTITY pref_collector_doubleclick_image_to_save.label "Double click to save image">
+<!ENTITY pref_collector_drag_image_to_save.label "Drag image to save image">
+<!ENTITY pref_save_image_to.label "Save image to">
+<!ENTITY pref_save_image_to_folder.label "Folder">
+<!ENTITY pref_save_image_to_askme.label "Always ask me where to save image">
+<!ENTITY pref_save_image_to_askme_pertab.label "Ask me where to save image for new tab">
+
+
+<!ENTITY pick_window.title "Pick Images">
+<!ENTITY pick_size_limits.label "Size limits">
+<!ENTITY pick_min_size.label "Min size">
+<!ENTITY pick_min_width.label "Min width">
+<!ENTITY pick_min_height.label "Min height">
+<!ENTITY pick_image_types.label "Image types">
+<!ENTITY pick_button_filter.label "Filter">
+<!ENTITY pick_button_filter.tooltip "Filter images by Site limits and Image types">
+<!ENTITY pick_button_showall.label "Show All">
+<!ENTITY pick_button_showall.tooltip "Show all images without Site limits and Image types limits">
+<!ENTITY pick_button_view.label "View">
+<!ENTITY pick_menu_thumbnails_small.label "Thumbnails(Small)">
+<!ENTITY pick_menu_thumbnails_normal.label "Thumbnails(Normal)">
+<!ENTITY pick_menu_thumbnails_large.label "Thumbnails(Large)">
+<!ENTITY pick_menu_show_image_size.label "Show Image Size">
+<!ENTITY pick_menu_show_image_name.label "Show Image Name">
+<!ENTITY pick_saved_directory.label "Saved Directory">
+<!ENTITY pick_clear_saved_directories.label "Clear all directories">
+<!ENTITY pick_browse.tooltip "Browse...">
+<!ENTITY pick_button_save.label "Save">
+<!ENTITY pick_button_save.tooltip "Save selected images">
+<!ENTITY pick_button_close.label "Close">
+<!ENTITY download_progress.tooltip "Open Download Manager">
+<!ENTITY configure_button.label "Configure">
+<!ENTITY configure_button.tooltip "Configure">
+<!ENTITY about_button.tooltip "About Image Picker">
+
+<!ENTITY pick_contex_menu_select_similar.label "Select Similar">
+<!ENTITY pick_contex_menu_select_all.label "Select All">
+<!ENTITY pick_contex_menu_unselect_all.label "Unselect All">
+
+<!ENTITY about_dialog.title "About Image Picker">
+<!ENTITY about_extension_name.label "Image Picker">
+<!ENTITY about_extension_desc.label "Choose (filter) images and save images from web page to local disk.">
+<!ENTITY about_version.label "Version">
+<!ENTITY about_creator.label "Creator">
+<!ENTITY about_homepage.label "Home page">
