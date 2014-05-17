@@ -23,6 +23,9 @@ pref('extensions.imagepicker.ui.ipbutton-left.contextmenu.show', false);
 pref('extensions.imagepicker.ui.notification.firefox-buildin', false);
 
 pref('extensions.imagepicker.collector.doubleclickImageToSave.enable', true);
+pref('extensions.imagepicker.collector.ctrlKeyClickImageToSave.enable', false);
+pref('extensions.imagepicker.collector.altKeyClickImageToSave.enable', false);
+pref('extensions.imagepicker.collector.shiftKeyClickImageToSave.enable', false);
 pref('extensions.imagepicker.collector.dragImageToSave.enable', true);
 
 //askMe -- Always ask me where to save image

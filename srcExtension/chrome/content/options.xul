@@ -102,6 +102,9 @@
     <prefpane id="paneSingleDownload" label="&pref_paneSingleDownload.label;" image="chrome://imagepicker/skin/option-mouse32.png">
           <preferences>
             <preference id="pref-collectorDoubleclickImageToSaveEnable" name="extensions.imagepicker.collector.doubleclickImageToSave.enable" type="bool" />
+            <preference id="pref-collectorCtrlKeyClickImageToSaveEnable" name="extensions.imagepicker.collector.ctrlKeyClickImageToSave.enable" type="bool" />
+            <preference id="pref-collectorAltKeyClickImageToSaveEnable" name="extensions.imagepicker.collector.altKeyClickImageToSave.enable" type="bool" />
+            <preference id="pref-collectorShiftKeyClickImageToSaveEnable" name="extensions.imagepicker.collector.shiftKeyClickImageToSave.enable" type="bool" />
             <preference id="pref-collectorDragImageToSaveEnable" name="extensions.imagepicker.collector.dragImageToSave.enable" type="bool" />
             <preference id="pref-collectorSavedSingleImageToFolder" name="extensions.imagepicker.collector.savedSingleImageToFolder" type="unichar" />
             <preference id="pref-collectorCreatedFolderByTitle" name="extensions.imagepicker.collector.createdFolderByTitle" type="bool" />
@@ -112,6 +115,9 @@
                 <label value="&pref_mouse_behavior.tooltip;"/>
                 <checkbox label="&pref_collector_doubleclick_image_to_save.label;" preference="pref-collectorDoubleclickImageToSaveEnable" />
                 <checkbox label="&pref_collector_drag_image_to_save.label;" preference="pref-collectorDragImageToSaveEnable" />
+                <checkbox label="&pref_collector_ctrlkeyclick_image_to_save.label;" preference="pref-collectorCtrlKeyClickImageToSaveEnable" />
+                <checkbox label="&pref_collector_altKeyclick_image_to_save.label;" preference="pref-collectorAltKeyClickImageToSaveEnable" />
+                <checkbox label="&pref_collector_shiftkeyclick_image_to_save.label;" preference="pref-collectorShiftKeyClickImageToSaveEnable" />
             </groupbox>
             <groupbox>
                 <caption label="&pref_save_image_to.label;"/>

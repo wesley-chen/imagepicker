@@ -59,6 +59,9 @@
 <!ENTITY pref_mouse_behavior.tooltip "可在瀏覽網頁時，快速保存單張圖片">
 <!ENTITY pref_collector_doubleclick_image_to_save.label "雙擊圖片時保存">
 <!ENTITY pref_collector_drag_image_to_save.label "拖動圖片時保存">
+<!ENTITY pref_collector_ctrlkeyclick_image_to_save.label "Crtl + 單擊 時保存">
+<!ENTITY pref_collector_altKeyclick_image_to_save.label "Alt + 單擊 時保存">
+<!ENTITY pref_collector_shiftkeyclick_image_to_save.label "Shift + 單擊 時保存">
 <!ENTITY pref_save_image_to.label "保存圖片至">
 <!ENTITY pref_save_image_to_folder.label "目錄">
 <!ENTITY pref_save_image_to_askme.label "總是詢問保存圖片的位置">

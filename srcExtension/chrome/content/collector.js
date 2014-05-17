@@ -18,6 +18,24 @@ ImagePickerChrome.Collector = {
     dragEvent: null,
 
     /**
+     * callback function for click event
+     *
+     * @method onClick
+     */
+    onClick : function(event) {
+         ImagePicker.Logger.debug("on click");
+         var enabled = (ImagePicker.Settings.isCtrlKeyClickImageToSaveEnabled() && event.ctrlKey)  
+                       || (ImagePicker.Settings.isAltKeyClickImageToSaveEnabled() && event.altKey)  
+                       || (ImagePicker.Settings.isShiftKeyClickImageToSaveEnabled() && event.shiftKey);  
+         if(enabled){
+             var imageElement = ImagePickerChrome.Collector.detectImageElement(event);
+             if(imageElement){
+                 ImagePickerChrome.Collector.saveImageFromElement(imageElement);
+             }
+         }
+    },
+    
+    /**
      * callback function for double click event
      *
      * @method onDblClick
@@ -272,6 +290,7 @@ ImagePickerChrome.Collector = {
     }
 };
 
+window.addEventListener("click",ImagePickerChrome.Collector.onClick,false);
 window.addEventListener("dblclick",ImagePickerChrome.Collector.onDblClick,false);
 window.addEventListener("dragstart",ImagePickerChrome.Collector.onDragstart,false);
 window.addEventListener("dragend",ImagePickerChrome.Collector.onDragend,false);

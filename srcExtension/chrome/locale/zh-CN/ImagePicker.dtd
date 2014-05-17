@@ -60,6 +60,9 @@
 <!ENTITY pref_mouse_behavior.tooltip "可在浏览网页时，快速保存单张图片">
 <!ENTITY pref_collector_doubleclick_image_to_save.label "双击图片时保存">
 <!ENTITY pref_collector_drag_image_to_save.label "拖动图片时保存">
+<!ENTITY pref_collector_ctrlkeyclick_image_to_save.label "Crtl + 单击 时保存">
+<!ENTITY pref_collector_altKeyclick_image_to_save.label "Alt + 单击 时保存">
+<!ENTITY pref_collector_shiftkeyclick_image_to_save.label "Shift + 单击 时保存">
 <!ENTITY pref_save_image_to.label "保存图片至">
 <!ENTITY pref_save_image_to_folder.label "目录">
 <!ENTITY pref_save_image_to_askme.label "总是询问保存图片的位置">

@@ -224,6 +224,18 @@ ImagePicker.Settings =  {
     isDragImageToSaveEnabled: function(){
         return this._prefs.getBoolPref("collector.dragImageToSave.enable");
     },
+    
+    isCtrlKeyClickImageToSaveEnabled: function(){
+        return this._prefs.getBoolPref("collector.ctrlKeyClickImageToSave.enable");
+    },
+    
+    isAltKeyClickImageToSaveEnabled: function(){
+        return this._prefs.getBoolPref("collector.altKeyClickImageToSave.enable");
+    },
+    
+    isShiftKeyClickImageToSaveEnabled: function(){
+        return this._prefs.getBoolPref("collector.shiftKeyClickImageToSave.enable");
+    },
 
     getSavedSingleImageToFolder: function(){
         var path = this.getUnicodeChar(this._prefs, "collector.savedSingleImageToFolder");
