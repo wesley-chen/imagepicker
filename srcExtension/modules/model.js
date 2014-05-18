@@ -38,6 +38,7 @@ ImagePicker.ImageInfo = function(id, image, imageTop) {
 
     this.fileExt = null;
     this.setFileName(this.nameFromURL);
+    this.outputFile = null;
 
     ImagePicker.Logger.info("Created ImageInfo[id=" + this.id + ", name=" + this.fileName + ", width=" + this.width
             + ", height=" + this.height + ",URL=" + this.url  + ",top=" + this.top + "]");

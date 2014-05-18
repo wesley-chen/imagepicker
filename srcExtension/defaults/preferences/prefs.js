@@ -27,6 +27,9 @@ pref('extensions.imagepicker.collector.ctrlKeyClickImageToSave.enable', false);
 pref('extensions.imagepicker.collector.altKeyClickImageToSave.enable', false);
 pref('extensions.imagepicker.collector.shiftKeyClickImageToSave.enable', false);
 pref('extensions.imagepicker.collector.dragImageToSave.enable', true);
+pref('extensions.imagepicker.collector.renamingEnable', false);
+pref('extensions.imagepicker.collector.renamingMask', "<seq_num>");
+pref('extensions.imagepicker.collector.renamingStartNum', 1);
 
 //askMe -- Always ask me where to save image
 //askMePerTab -- Ask me where to save image for new tab

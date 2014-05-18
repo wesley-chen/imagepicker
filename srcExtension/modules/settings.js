@@ -139,16 +139,19 @@ ImagePicker.Settings =  {
         return this._prefs.getBoolPref("showSubfolderNameConfirmationPopup");
     },
 
-    isRenamingEnabled: function(){
-        return this._prefs.getBoolPref("renamingEnable");
+    isRenamingEnabled: function(batchMode){
+        var key = (batchMode? "renamingEnable" : "collector.renamingEnable");
+        return this._prefs.getBoolPref(key);
     },
 
-    getRenamingMask: function(){
-        return this._prefs.getCharPref("renamingMask");
+    getRenamingMask: function(batchMode){
+        var key = (batchMode? "renamingMask" : "collector.renamingMask");
+        return this._prefs.getCharPref(key);
     },
     
-    getRenamingStartNum: function(){
-        return this._prefs.getIntPref("renamingStartNum");
+    getRenamingStartNum: function(batchMode){
+        var key = (batchMode? "renamingStartNum" : "collector.renamingStartNum");
+        return this._prefs.getIntPref(key);
     },
 
     isOpenExplorerAfterSaved: function(){

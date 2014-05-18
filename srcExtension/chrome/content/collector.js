@@ -1,6 +1,7 @@
 /** **************** Collector Class ******************** */
 Components.utils.import("resource://imagepicker/common.js");
 Components.utils.import("resource://imagepicker/settings.js");
+Components.utils.import("resource://imagepicker/renamer.js");
 Components.utils.import("resource://imagepicker/xulUtils.js");
 Components.utils.import("resource://imagepicker/fileUtils.js");
 Components.utils.import("resource://imagepicker/model.js");
@@ -91,31 +92,58 @@ ImagePickerChrome.Collector = {
 
          var stringsBundle = document.getElementById("ip-string-bundle");
          var currentTabId = null;
+         var startNum = 1;
          var currentTab = gBrowser.selectedTab;
          if(currentTab) {
+             var browser = gBrowser.getBrowserForTab(currentTab);
+             // remove unnecessary text from tab title
+             var validTabTitle = ImagePicker.FileUtils.makeFolderNameByTitle(browser.contentDocument.title);
+             image.tabTitle = validTabTitle;
+             
              currentTabId = currentTab.getUserData("tabId");
              if(currentTabId == null){
                  currentTabId = "t-" + new Date().valueOf();
                  currentTab.setUserData("tabId", currentTabId, null);
              }
+             
+             startNum = currentTab.getUserData("startNum");
+             if(startNum == null){
+                 startNum = ImagePicker.Settings.getRenamingStartNum(false);
+             }else{
+                 startNum = startNum + 1;
+             }
+         }
+         
+         if(ImagePicker.Settings.isRenamingEnabled(false)){
+             var masks = ImagePicker.Settings.getRenamingMask(false);                    
+             var renamer = new ImagePicker.Renamer(masks, startNum);
+             renamer.rename([image]);  
          }
 
 		 var destDirOrFile = ImagePickerChrome.Collector.getOrCreateSavedFolderOrFile(image, currentTabId, stringsBundle);
 		 if(destDirOrFile){
 		     var destDir = destDirOrFile;
-		     var destFile = null;
 		     if(destDirOrFile.isFile()){
 		         destDir = destDirOrFile.parent;
-		         destFile = destDirOrFile;
+		         image.outputFile = destDirOrFile;
 		     }
-
+		     
              var notificationTitle = stringsBundle.getFormattedString("saveNotificationTitleSingle", [ image.getFileNameExt() ]);
              var notification = new ImagePickerChrome.Notification(notificationTitle, destDir.path, gBrowser.selectedBrowser);
              notification.show();
 
              var privacyInfo = ImagePickerChrome.getPrivacyInfo();
-    	     var downloadSession = new ImagePicker.DownloadSession([image], destDir, destFile, privacyInfo, null, null, stringsBundle, false);
+             var savedListeners = [];
+    	     var downloadSession = new ImagePicker.DownloadSession([image], destDir, privacyInfo, null, savedListeners, stringsBundle);
     	     downloadSession.saveImages();
+    	     
+             if(ImagePicker.Settings.isRenamingEnabled(false)){
+                 var masks = ImagePicker.Settings.getRenamingMask(false);
+                 var isRenamedBySeq = /<seq_num>/.test(masks);
+                 if(isRenamedBySeq && currentTab){
+                     currentTab.setUserData("startNum", startNum, null);
+                 }
+             }
 	     }
 	},
 

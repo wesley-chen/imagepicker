@@ -7,6 +7,7 @@ Components.utils.import("resource://imagepicker/common.js");
 Components.utils.import("resource://imagepicker/hashMap.js");
 Components.utils.import("resource://imagepicker/fileUtils.js");
 Components.utils.import("resource://imagepicker/settings.js");
+Components.utils.import("resource://imagepicker/renamer.js");
 Components.utils.import("resource://imagepicker/xulUtils.js");
 Components.utils.import("resource://imagepicker/model.js");
 Components.utils.import("resource://imagepicker/filters.js");
@@ -34,13 +35,17 @@ ImagePickerChrome.Controller = {
         this.browser = window.arguments[0].browser;
         this.popupNotifications = window.arguments[0].popupNotifications;
 
-        var postSavedListenersFromArgument = window.arguments[0].listeners;
+        var savedListenersFromArgument = window.arguments[0].listeners;
 
         /**
          * Register the given listener to extend the after image saving behavior The given listener must have a
          * afterSavedImages() method.
          */
         var postSavedListener = {
+                
+            preSavedImages : function(savedFolder, images) {
+            },
+            
             afterSavedImages : function(savedFolder, images) {
                 // open Explorer after saved if need
                 if (ImagePicker.Settings.isOpenExplorerAfterSaved()) {
@@ -54,10 +59,10 @@ ImagePickerChrome.Controller = {
             }
         };
 
-        this.postSavedListeners = [ postSavedListener ];
-        this.postSavedListeners = this.postSavedListeners.concat(postSavedListenersFromArgument);
-        ImagePicker.Logger.debug("Argument listeners: " + postSavedListenersFromArgument.length);
-        ImagePicker.Logger.debug("PostSavedListeners: " + this.postSavedListeners.length);
+        this.savedListeners = [postSavedListener];
+        this.savedListeners = this.savedListeners.concat(savedListenersFromArgument);
+        ImagePicker.Logger.debug("Argument listeners: " + savedListenersFromArgument.length);
+        ImagePicker.Logger.debug("SavedListeners: " + this.savedListeners.length);
 
         this.imageList = this.rawImageList;
         this.selectedMap = new ImagePicker.HashMap();
@@ -142,7 +147,7 @@ ImagePickerChrome.Controller = {
         // Add menu items from settings
         var paths = this.settings.getSavedFolderPaths();
         for (var i = 0; i < paths.length; i++) {
-            var item = savedPathMenulist.insertItemAt(i, paths[i]);
+            savedPathMenulist.insertItemAt(i, paths[i]);
         }
 
         // select one
@@ -607,8 +612,16 @@ ImagePickerChrome.Controller = {
         if (savedImages.length == 0) {
             return;
         }
+        
+        if(ImagePicker.Settings.isRenamingEnabled(true)){
+            var masks = ImagePicker.Settings.getRenamingMask(true);
+            var startNum = ImagePicker.Settings.getRenamingStartNum(true);
+            var renamer = new ImagePicker.Renamer(masks, startNum);
+            renamer.rename(savedImages);
+        }
 
         var newDownloadProgressListener = new ImagePickerChrome.DownloadProgressListener(savedImages.length);
+
         var stringsBundle = this.getStringsBundle();
 
         var notificationTitle = stringsBundle.getFormattedString("saveNotificationTitleMultiple",
@@ -618,8 +631,8 @@ ImagePickerChrome.Controller = {
         notification.show();
 
         var privacyInfo = ImagePickerChrome.getPrivacyInfo();
-        var downloadSession = new ImagePicker.DownloadSession(savedImages, dest, null, privacyInfo,
-                newDownloadProgressListener, this.postSavedListeners, stringsBundle, true);
+        var downloadSession = new ImagePicker.DownloadSession(savedImages, dest, privacyInfo,
+                newDownloadProgressListener, this.savedListeners, stringsBundle);
         downloadSession.saveImages();
     },
 

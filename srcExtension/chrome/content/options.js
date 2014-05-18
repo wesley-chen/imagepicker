@@ -23,8 +23,9 @@ ImagePickerChrome.Options = {
         var askMeRadio = document.getElementById(savedSingleImageOption + "Radio");
         askMeRadio.click();
 
-        this.enableOrDisableRenamingElements(ImagePicker.Settings.isRenamingEnabled());
-
+        this.enableOrDisableRenamingElements(ImagePicker.Settings.isRenamingEnabled(true), '');
+        this.enableOrDisableRenamingElements(ImagePicker.Settings.isRenamingEnabled(false), '-collector');
+        
         // init RemoveText Elements
         this.enableOrDisableCreatedByTitleElements(ImagePicker.Settings.isCreatedFolderByTitle());
     },
@@ -50,12 +51,12 @@ ImagePickerChrome.Options = {
         }
     },
 
-    enableOrDisableRenamingElements : function(enable) {
+    enableOrDisableRenamingElements : function(enable, elemSuffix) {
 
         var renamingMaskTextbox = document
-                .getElementById("renamingMaskTextbox");
+                .getElementById("renamingMaskTextbox" + elemSuffix);
         var renamingStartNumTextbox = document
-        .getElementById("renamingStartNumTextbox");
+        .getElementById("renamingStartNumTextbox"+ elemSuffix);
 
         if (enable) {
             renamingMaskTextbox.disabled = false;

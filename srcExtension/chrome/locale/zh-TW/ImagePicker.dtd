@@ -29,6 +29,7 @@
 <!ENTITY pref_rename_tags_desc "重命名標記">
 <!ENTITY pref_rename_tag_seq_num "&lt;seq_num&gt;">
 <!ENTITY pref_rename_tag_seq_num_desc "按圖片的出現順序，自動重命名圖片, 例如： 001, 002, 003 ...">
+<!ENTITY pref_rename_tag_seq_num_desc_collector "按點擊的順序，自動重命名圖片, 例如： 1, 2, 3 ...">
 <!ENTITY pref_rename_tag_date "&lt;date&gt;">
 <!ENTITY pref_rename_tag_date_desc "當前日期, 例如：2013-09-21">
 <!ENTITY pref_rename_tag_datetime "&lt;datetime&gt;">

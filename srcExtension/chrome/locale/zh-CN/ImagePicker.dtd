@@ -30,6 +30,7 @@
 <!ENTITY pref_rename_tags_desc "重命名标记">
 <!ENTITY pref_rename_tag_seq_num "&lt;seq_num&gt;">
 <!ENTITY pref_rename_tag_seq_num_desc "按图片的出现顺序，自动重命名图片, 例如： 001, 002, 003 ...">
+<!ENTITY pref_rename_tag_seq_num_desc_collector "按点击的顺序，自动重命名图片, 例如： 1, 2, 3 ...">
 <!ENTITY pref_rename_tag_date "&lt;date&gt;">
 <!ENTITY pref_rename_tag_date_desc "当前日期, 例如：2013-09-21">
 <!ENTITY pref_rename_tag_datetime "&lt;datetime&gt;">

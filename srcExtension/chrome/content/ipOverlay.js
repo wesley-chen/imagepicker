@@ -494,6 +494,9 @@ ImagePickerChrome.CloseTabListener = function(tabs) {
 
 ImagePickerChrome.CloseTabListener.prototype = {
 
+    preSavedImages: function(savedFolder, images){
+    },
+    
     afterSavedImages: function(savedFolder, images){
 
         ImagePicker.Logger.debug("Closing tabs...");

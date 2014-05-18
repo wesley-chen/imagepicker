@@ -29,6 +29,7 @@
 <!ENTITY pref_rename_tags_desc "Renaming Tags">
 <!ENTITY pref_rename_tag_seq_num "&lt;seq_num&gt;">
 <!ENTITY pref_rename_tag_seq_num_desc "Sequence number, e.g. 001, 002, 003 ...">
+<!ENTITY pref_rename_tag_seq_num_desc_collector "Sequence number, e.g. 1, 2, 3 ...">
 <!ENTITY pref_rename_tag_date "&lt;date&gt;">
 <!ENTITY pref_rename_tag_date_desc "Current date, e.g. 2013-09-21">
 <!ENTITY pref_rename_tag_datetime "&lt;datetime&gt;">
