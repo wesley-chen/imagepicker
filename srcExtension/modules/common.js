@@ -21,9 +21,6 @@ if ("undefined" == typeof (ImagePicker)) {
 ImagePicker.IpSession = function(curWindow) {
     
     this.window = curWindow;
-    
-    // For Firefox version < 32
-    this.httpCacheSession = null;
 };
 
 /**
