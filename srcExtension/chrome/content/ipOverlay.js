@@ -35,6 +35,16 @@ ImagePickerChrome.init = function(){
     	    		});
 
 	    }, false);
+	    
+        var appInfo = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
+        var versionChecker = Components.classes["@mozilla.org/xpcom/version-comparator;1"]
+                       .getService(Components.interfaces.nsIVersionComparator);
+        var isUpperV31 = versionChecker.compare(appInfo.version, "31") > 0;
+        if(isUpperV31){
+            Components.utils.import("resource://imagepicker/listenerFirefox32.js");
+        } else {
+            Components.utils.import("resource://imagepicker/listenerFirefox4.js");
+        }
 	  }
 };
 window.addEventListener("load", ImagePickerChrome.init, false);
@@ -171,10 +181,8 @@ ImagePickerChrome.pickImagesFromTabs = function(event, tabTitle){
  */
 ImagePickerChrome.pickImages = function(tabs, title){
 
-    // init cache session
-    var cacheService = Cc["@mozilla.org/network/cache-service;1"].getService(Ci.nsICacheService);
-    ImagePickerChrome.httpCacheSession = cacheService.createSession("HTTP", Ci.nsICache.STORE_ANYWHERE, Ci.nsICache.STREAM_BASED);
-    ImagePickerChrome.httpCacheSession.doomEntriesIfExpired = false;
+    var ipSession = new ImagePicker.IpSession(window);
+    ImagePicker.ImageListener.postCreateIpSession(ipSession);
 
     // Get images from all given tabs
     var imageInfoList = new Array();
@@ -194,7 +202,7 @@ ImagePickerChrome.pickImages = function(tabs, title){
 
             ImagePicker.Logger.info("document = " + currentDocument.title + ", images = " + currentImageList.length);
 
-            imageInfoList = imageInfoList.concat(ImagePickerChrome.convertAndTidyImage(currentImageList, validTabTitle));
+            imageInfoList = imageInfoList.concat(ImagePickerChrome.convertAndTidyImage(currentImageList, validTabTitle, ipSession));
         }// end for each document
     });
 
@@ -274,7 +282,7 @@ ImagePickerChrome.collectImagesFromDoc = function(document){
  *            htmlImageList
  * @return {Array[ImagePicker.ImageInfo]}
  */
-ImagePickerChrome.convertAndTidyImage = function(htmlImageList, tabTitle){
+ImagePickerChrome.convertAndTidyImage = function(htmlImageList, tabTitle, ipSession){
 
     // Filter image by url
     var tidiedHtmlImageList = ImagePickerChrome.filterDuplicateImage(htmlImageList);
@@ -291,10 +299,8 @@ ImagePickerChrome.convertAndTidyImage = function(htmlImageList, tabTitle){
 
         var image = new ImagePicker.ImageInfo(guid++, tImg, ImagePickerChrome.getImageTop(tImg));
         image.tabTitle = tabTitle;
-
-        ImagePickerChrome.ImageUtils.updateFileExtensionByMIME(image);
-        ImagePickerChrome.ImageUtils.updateFileSizeFromCache(image);
-        ImagePickerChrome.ImageUtils.updateFileNameFromCache(image);
+        
+        ImagePicker.ImageListener.postCreateImage(image, ipSession);
 
         imageInfoList.push(image);
     }

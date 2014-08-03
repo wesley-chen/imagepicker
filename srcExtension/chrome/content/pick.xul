@@ -9,7 +9,6 @@
     onload="ImagePickerChrome.Controller.loadPickWindow();" onunload="ImagePickerChrome.Controller.unloadPickWindow();"
     >
     <script type="application/x-javascript" src="common.js" />
-    <script type="application/x-javascript" src="images.js" />
     <script type="application/x-javascript" src="views.js" />
     <script type="application/x-javascript" src="notification.js" />
     <script type="application/x-javascript" src="controller.js" />

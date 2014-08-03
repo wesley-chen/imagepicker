@@ -12,6 +12,21 @@ if ("undefined" == typeof (ImagePicker)) {
 };
 
 /**
+ * Provides a session context for image picker
+ *
+ * @namespace ImagePicker
+ * @class IpSession
+ * @constructor
+ */
+ImagePicker.IpSession = function(curWindow) {
+    
+    this.window = curWindow;
+    
+    // For Firefox version < 32
+    this.httpCacheSession = null;
+};
+
+/**
  * Provides the log utilities used by the ImagePicker
  *
  * @class ImagePicker.Logger

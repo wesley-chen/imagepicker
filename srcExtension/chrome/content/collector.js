@@ -86,9 +86,11 @@ ImagePickerChrome.Collector = {
      */
 	saveImageFromElement : function(imageElement) {
 
+        var ipSession = new ImagePicker.IpSession(window);
+        ImagePicker.ImageListener.postCreateIpSession(ipSession);
+	    
 		 var image = new ImagePicker.ImageInfo(1, imageElement, 0);
-	     ImagePickerChrome.ImageUtils.updateFileExtensionByMIME(image);
-	     ImagePickerChrome.ImageUtils.updateFileNameFromCache(image);
+		 ImagePicker.ImageListener.postCreateImage(image, ipSession);
 
          var stringsBundle = document.getElementById("ip-string-bundle");
          var currentTabId = null;
