@@ -2,11 +2,11 @@
 <project name="ImagePicker" default="package">
 
     <property name="extension.id" value="ImagePicker@topolog.org" />
-    <property name="extension.version" value="1.9.1" />
+    <property name="extension.version" value="1.9.2" />
 
     <!-- firefox configruation e.g. env.win.firefox4.0.properties, env.linux.firefox3.6.properties,
             env.win.firefox-beta.properties, env.win.firefox-nightly.properties-->
-    <property file="env.win.firefox-nightly.properties"/>
+    <property file="env.win.firefox-beta.properties"/>
 
     <!-- other firefox configruation, e.g. -safe-mode -jsconsole -->
     <property name="firefox.arg" value=""/>

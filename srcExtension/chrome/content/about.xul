@@ -11,7 +11,7 @@
     <script type="application/x-javascript" src="chrome://imagepicker/content/about.js" />
     <vbox id="clientBox" flex="1">
         <label id="extensionName" crop="right" value="&about_extension_name.label;" />
-        <label id="extensionVersion" crop="right" value="&about_version.label; 1.9.1-b752" />
+        <label id="extensionVersion" crop="right" value="&about_version.label; 1.9.2-b787" />
         <description id="extensionDescription" class="boxIndent">
             &about_extension_desc.label;
         </description>

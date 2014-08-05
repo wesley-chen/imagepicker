@@ -27,11 +27,13 @@ ImagePicker.ImageListener._updateFileSizeFromCache = function(imageInfo , ipSess
     var charset = aDocument.characterSet;
     
     var cacheKey = ImagePicker.ImageListener._makeURI(aURL, charset);
-    
+        
     // try to update file size by cache listener
     var listener = new ImagePicker.CacheListener(imageInfo);
     try {
-        ipSession.cacheStorage.asyncOpenURI(cacheKey, "", Ci.nsICacheStorage.CHECK_MULTITHREADED, listener);
+
+        ipSession.cacheStorage.asyncOpenURI(cacheKey, "", Ci.nsICacheStorage.OPEN_NORMALLY, listener);
+  
     } catch (ecache) {
         ImagePicker.Logger.warn("Cannot update file size by async Cache for " + imageInfo, ecache);
     }
