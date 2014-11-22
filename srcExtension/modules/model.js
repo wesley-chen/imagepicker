@@ -35,6 +35,7 @@ ImagePicker.ImageInfo = function(id, image, imageTop) {
     this.properyChangeListener = null;
 
     this.nameFromURL = this.url.substring(this.url.lastIndexOf('/') + 1, this.url.length);
+    this.nameFromURL = decodeURIComponent(this.nameFromURL);
 
     this.fileExt = null;
     this.setFileName(this.nameFromURL);
