@@ -208,6 +208,7 @@
             <preference id="pref-ipButtonRightShowOnContextMenu" name="extensions.imagepicker.ui.ipbutton-right.contextmenu.show" type="bool" />
             <preference id="pref-ipButtonLeftShowOnContextMenu" name="extensions.imagepicker.ui.ipbutton-left.contextmenu.show" type="bool" />
 
+            <preference id="pref-showNotification" name="extensions.imagepicker.ui.notification.show" type="bool" />
             <preference id="pref-notificationFirefoxBuildin" name="extensions.imagepicker.ui.notification.firefox-buildin" type="bool" />
           </preferences>
           <vbox>
@@ -267,6 +268,7 @@
                     </rows>
                 </grid>
             </groupbox>
+             <checkbox label="&pref_show_notification.label;" preference="pref-showNotification" />
             <checkbox label="&pref_use_firfox_buildin_notification.label;" preference="pref-notificationFirefoxBuildin" />
         </vbox>
     </prefpane>

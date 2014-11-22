@@ -291,6 +291,10 @@ ImagePicker.Settings =  {
     isUsedFirefoxBuildinNotification: function(button){
         return this._prefs.getBoolPref("ui.notification.firefox-buildin");
     },
+    
+    isShowNotification: function(){
+        return this._prefs.getBoolPref("ui.notification.show");
+    },
 
     /**
      * Get a unicode char value from preference system for the given prefName

@@ -54,6 +54,7 @@
 <!ENTITY pref_ui_buttons.label "Buttons">
 <!ENTITY pref_show_on_toolbar.label "Show on Toolbar">
 <!ENTITY pref_show_on_contextmenu.label "Show on Context Menu">
+<!ENTITY pref_show_notification.label "Show notification">
 <!ENTITY pref_use_firfox_buildin_notification.label "Use Firefox build-in notification (Center)">
 
 <!ENTITY pref_mouse_behavior.label "Mouse">

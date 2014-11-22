@@ -20,6 +20,7 @@ pref('extensions.imagepicker.ui.ipbutton-right.toolbar.show', false);
 pref('extensions.imagepicker.ui.ipbutton-right.contextmenu.show', false);
 pref('extensions.imagepicker.ui.ipbutton-left.toolbar.show', false);
 pref('extensions.imagepicker.ui.ipbutton-left.contextmenu.show', false);
+pref('extensions.imagepicker.ui.notification.show', true);
 pref('extensions.imagepicker.ui.notification.firefox-buildin', false);
 
 pref('extensions.imagepicker.collector.doubleclickImageToSave.enable', true);

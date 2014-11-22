@@ -55,6 +55,7 @@
 <!ENTITY pref_ui_buttons.label "按钮显示">
 <!ENTITY pref_show_on_toolbar.label "在工具栏显示">
 <!ENTITY pref_show_on_contextmenu.label "在右键菜单显示">
+<!ENTITY pref_show_notification.label "显示提示框">
 <!ENTITY pref_use_firfox_buildin_notification.label "使用火狐内置的提示方式（在中间显示）">
 
 <!ENTITY pref_mouse_behavior.label "鼠标">

@@ -23,6 +23,9 @@ ImagePickerChrome.Notification = function(title, savedFolderPath, browser, popup
 
 ImagePickerChrome.Notification.prototype = {
     show : function() {
+        if(!ImagePicker.Settings.isShowNotification()){
+            return;
+        }
         var fileUtils = ImagePicker.FileUtils;
         var alertListener = {
             observe : function(subject, topic, data) {
