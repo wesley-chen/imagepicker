@@ -93,4 +93,5 @@
             <zipfileset dir="${build.dir}" includes="chrome.manifest" />
         </zip>
     </target>
+
 </project>

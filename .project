@@ -20,10 +20,17 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>tern.eclipse.ide.core.ternBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.vjet.core.nature</nature>
 		<nature>org.xulbooster.eclipse.xb.xulNature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
+		<nature>tern.eclipse.ide.core.ternnature</nature>
+		<nature>org.eclipse.angularjs.core.angularnature</nature>
 	</natures>
 </projectDescription>

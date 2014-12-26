@@ -217,7 +217,11 @@ ImagePickerChrome.pickImages = function(tabs, title){
         "browser": gBrowser.selectedBrowser,
         "popupNotifications": PopupNotifications
     };
-    var mainWindow = window.openDialog("chrome://imagepicker/content/pick.xul", "PickImage.mainWindow", "chrome,centerscreen,resizable, dialog=no, modal=no, dependent=no,status=yes", params);
+    //window.ipParams = "aa";
+    //window.openUILinkIn('chrome://imagepicker/content/image-browser.html', 'tab');
+    var url = "chrome://imagepicker/content/pick.xul";
+    url = 'chrome://imagepicker/content/viewer/main.html';
+    var mainWindow = window.openDialog(url, "PickImage.mainWindow", "chrome,centerscreen,resizable, dialog=no, modal=no, dependent=no,status=yes", params);
     mainWindow.focus();
 };
 
