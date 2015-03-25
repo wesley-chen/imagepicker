@@ -4,11 +4,11 @@ imagepicker
 A Firefox plugin to download images while you browse
 
 FireFox +
-    1. Console2 (enable log from "Chrome" on Info level)
-    2. Extension Developer or Developer Assistant (enable Debugging Preferences)
+    1. Console2 (enable log from "Chrome" on Info level) or Auto-Open Browser Console
+    2. DevPrefs (enable Debugging Preferences)
     3. Quick Locale Switcher
     4. DOM Inspector
-    5. ChromeBug
+    5. ChromEdit Plus ("Restart" button)
 
 https://developer.mozilla.org/en/Setting_up_extension_development_environment#Development_extensions
 

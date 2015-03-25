@@ -150,6 +150,6 @@ ImagePicker.DownloadSession.prototype = {
                 | nsIWBP.PERSIST_FLAGS_AUTODETECT_APPLY_CONVERSION;
         persist.progressListener = this.newDownloadProgressListener;
 
-        persist.saveURI(fromURI, cacheKey, null, null, null, toURI, this.privacyContext);
+        persist.saveURI(fromURI, cacheKey, null, null, null, null, toURI, this.privacyContext);
     }
 };
