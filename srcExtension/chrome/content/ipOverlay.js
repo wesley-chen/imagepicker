@@ -2,6 +2,7 @@ Components.utils.import("resource://imagepicker/common.js");
 Components.utils.import("resource://imagepicker/model.js");
 Components.utils.import("resource://imagepicker/settings.js");
 Components.utils.import("resource://imagepicker/fileUtils.js");
+Components.utils.import("resource://imagepicker/listenerFirefox32.js");
 
 ImagePickerChrome.init = function(){
 
@@ -36,15 +37,15 @@ ImagePickerChrome.init = function(){
 
 	    }, false);
 	    
-        var appInfo = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
-        var versionChecker = Components.classes["@mozilla.org/xpcom/version-comparator;1"]
-                       .getService(Components.interfaces.nsIVersionComparator);
-        var isUpperV31 = versionChecker.compare(appInfo.version, "31") > 0;
-        if(isUpperV31){
-            Components.utils.import("resource://imagepicker/listenerFirefox32.js");
-        } else {
-            Components.utils.import("resource://imagepicker/listenerFirefox4.js");
-        }
+//        var appInfo = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
+//        var versionChecker = Components.classes["@mozilla.org/xpcom/version-comparator;1"]
+//                       .getService(Components.interfaces.nsIVersionComparator);
+//        var isUpperV31 = versionChecker.compare(appInfo.version, "31") > 0;
+//        if(isUpperV31){
+//            Components.utils.import("resource://imagepicker/listenerFirefox32.js");
+//        } else {
+//            Components.utils.import("resource://imagepicker/listenerFirefox4.js");
+//        }
 	  }
 };
 window.addEventListener("load", ImagePickerChrome.init, false);
