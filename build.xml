@@ -6,7 +6,7 @@
 
     <!-- firefox configruation e.g. env.win.firefox-stable.propertiess, env.linux.firefox3.6.properties,
             env.win.firefox-beta.properties, env.win.firefox-nightly.properties-->
-    <property file="env.win.firefox-beta.properties"/>
+    <property file="env.win.firefox-nightly.properties"/>
 
     <!-- other firefox configruation, e.g. -safe-mode -jsconsole -->
     <property name="firefox.arg" value=""/>
