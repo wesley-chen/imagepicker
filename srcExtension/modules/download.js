@@ -54,10 +54,12 @@ ImagePicker.DownloadSession.prototype = {
         var fileNames = new Array();
         for (var i = 0; i < images.length; i++) {
             var img = images[i];
-            var fileNameExt = img.fileName + "." + (img.fileExt? img.fileExt : "jpg");
+            
             var file = img.outputFile;
             if(!file){
-                file = ImagePicker.FileUtils.createUniqueFile(fileNameExt, this.destDir, fileNames);
+                var hasExt = (img.fileExt != null && img.fileExt.trim().length > 0);
+                var fileExt = (hasExt? img.fileExt : "jpg");
+                file = ImagePicker.FileUtils.createUniqueFile(img.fileName, fileExt, this.destDir, fileNames);
             }
 
             try {

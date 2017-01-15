@@ -90,11 +90,11 @@ ImagePicker.FileUtils = {
         var validName = originalName;
 
         // replace special char: [,\,/,:,*,.,?,",<,>,|,]
-        var reg = new RegExp("[\\\/:\*?\"<>|]", "g");
+        var reg = new RegExp("[\\\\/:\*?\"<>|]", "g");
 
         validName = validName.replace(reg, "");
 
-        validName = validName.substr(0, 100);
+        validName = validName.substr(0, 200);
 
         // trim
         validName = validName.replace(/^\s*/, "").replace(/\s*$/, "");
@@ -119,11 +119,12 @@ ImagePicker.FileUtils = {
      *            <String,boolean>} fileNames the Array contains all file names which will be created in parentDir.
      * @return {nsILocalFile} the nsILocalFile representing the unique file for the given file name
      */
-    createUniqueFile : function(fileName, parentDir, fileNames) {
+    createUniqueFile : function(fileName, fileExt, parentDir, fileNames) {
 
-        var originalName = this.toValidName(fileName);
-
-        var tempName = originalName;
+        var filteredFileName = this.toValidName(fileName);
+        var filteredFileExt = this.toValidName(fileExt);
+               
+        var tempName = filteredFileName + "." + filteredFileExt;
 
         // create a temp file for the file name
         var tempFile = Cc['@mozilla.org/file/local;1'].createInstance(Ci.nsILocalFile);
@@ -135,14 +136,8 @@ ImagePicker.FileUtils = {
         while (tempFile.exists() || (typeof (fileNames[tempName]) != 'undefined')) {
             // if the file exists or have a exist name in array, make a new file
             // name
-            if (originalName.indexOf('.') != -1) { // have file ext
-                var ext = originalName.substring(originalName.lastIndexOf('.'), originalName.length);
-                var fileNameWithoutExt = originalName.substring(0, originalName.length - ext.length);
-                tempName = fileNameWithoutExt + "(" + incNumber + ")" + ext;
-            } else {
-                tempName = originalName + "(" + incNumber + ")";
-            }
-
+            tempName = filteredFileName + "(" + incNumber + ")." + filteredFileExt;
+            
             // init file with new name
             tempFile.initWithFile(parentDir);
             tempFile.append(tempName);
