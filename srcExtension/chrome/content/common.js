@@ -36,7 +36,7 @@ if ("undefined" == typeof (ImagePickerChrome)) {
 
         var toolbar = document.getElementById(toolbarId);
     	var button = document.getElementById(id);
-
+    	
         if (!button && isShow) {
             toolbar.insertItem(id, null);
             toolbar.setAttribute("currentset", toolbar.currentSet);
@@ -58,6 +58,16 @@ if ("undefined" == typeof (ImagePickerChrome)) {
             toolbar.setAttribute("currentset", newCurrentset);
             document.persist(toolbar.id, "currentset");
         }
+    };
+    
+    ImagePickerChrome.showContextMenu = function() {
+        var buttonNames = ["ipbutton-simple", "ipbutton-all", "ipbutton-left", "ipbutton-right", "ipbuttons"];
+        buttonNames.forEach(function(buttonName){
+            var button = document.getElementById(buttonName + "-context");
+            var isShow = ImagePicker.Settings.isShowOnContextMenu(buttonName);
+            button.hidden = !isShow;
+            ImagePicker.Logger.debug("button: " + button.id + ", hidden=" + button.hidden);
+        });
     };
 
     ImagePickerChrome.getPrivacyInfo = function() {

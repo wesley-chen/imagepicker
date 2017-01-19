@@ -22,31 +22,6 @@ ImagePickerChrome.init = function(){
 	    		});
             }
        });
-
-      // Add buttons to context menu
-	  var contextMenu = document.getElementById("contentAreaContextMenu");
-	  if (contextMenu){
-	    contextMenu.addEventListener("popupshowing", function(){
-
-    	    	buttonNames.forEach(function(buttonName){
-    	    		    var button = document.getElementById(buttonName + "-context");
-    	    		    var isShow = ImagePicker.Settings.isShowOnContextMenu(buttonName);
-    	    		    button.hidden = !isShow;
-    	    		    ImagePicker.Logger.debug("button: " + button.id + ", hidden=" + button.hidden);
-    	    		});
-
-	    }, false);
-	    
-//        var appInfo = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
-//        var versionChecker = Components.classes["@mozilla.org/xpcom/version-comparator;1"]
-//                       .getService(Components.interfaces.nsIVersionComparator);
-//        var isUpperV31 = versionChecker.compare(appInfo.version, "31") > 0;
-//        if(isUpperV31){
-//            Components.utils.import("resource://imagepicker/listenerFirefox32.js");
-//        } else {
-//            Components.utils.import("resource://imagepicker/listenerFirefox4.js");
-//        }
-	  }
 };
 window.addEventListener("load", ImagePickerChrome.init, false);
 

@@ -139,6 +139,8 @@ ImagePickerChrome.Options = {
         }
 
         ImagePicker.Logger.debug("Installing button...");
+        
+        //　Update toolbar buttons
         var buttonNames = [ "ipbutton-simple", "ipbutton-all", "ipbutton-left", "ipbutton-right", "ipbuttons" ];
         buttonNames.forEach(function(buttonName) {
             var buttonId = buttonName + "-toolbar";

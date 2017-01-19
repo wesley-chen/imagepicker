@@ -50,7 +50,7 @@
         </toolbarbutton>
     </toolbarpalette>
 
-    <popup id="contentAreaContextMenu">
+    <popup id="contentAreaContextMenu" onpopupshown="ImagePickerChrome.showContextMenu()">
         <menuitem id="ipbutton-simple-context" label="&menu_pick_images.label;" accesskey="p" insertafter="context-sep-ip"
             class="menuitem-iconic ip-button-1" oncommand="ImagePickerChrome.pickImagesFromCurrentTab(event);" hidden="false">
         </menuitem>
